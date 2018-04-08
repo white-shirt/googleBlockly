@@ -63,9 +63,8 @@
             </div>       
           </div>
           <div class="sidebarContent workspaceToCode"></div>
-          <!-- <div class="sidebarContent course">
-              course
-          </div> -->
+          <div class="sidebarContent course">
+          </div>
           <ul class="navDot">
             <li class="navList workspaceToCodeDot"></li>
             <li class="navList saveWorkspaceDot"></li>
@@ -97,6 +96,7 @@
       </category>
       <category name="灯光" colour="#fec002">
         <block type="blockly_earcolor"></block>
+        <block type="blockly_eyeswitch"></block>
         <block type="blockly_eyelight" disabled="true"></block>
         <block type="blockly_customizecolor" disabled="true"></block>
         <block type="blockly_closelight" disabled="true"></block>
@@ -119,15 +119,12 @@
         <block type="blockly_number"></block>
       </category>
       <category name="识别" colour="#01c1b6">
-        <block type="blockly_tracking" disabled="true"></block>
-        <block type="blockly_obsessive" disabled="true"></block>
-        <block type="blockly_follow" disabled="true"></block>
+        <block type="blockly_tracking"></block>
+        <block type="blockly_obsessive"></block>
+        <block type="blockly_follow"></block>
+        <block type="blockly_trackingdir"></block>
         <block type="blockly_btmsensor"></block>
         <block type="blockly_eyesensor"></block>
-      </category>
-      <category name="测试" colour="#00c25f">
-        <block type="blockly_math_sub" disabled="true"></block>
-        <block type="blockly_number" disabled="true"></block>
       </category>
     </xml>
   <script src="blockly/storage.js"></script>
@@ -135,5 +132,6 @@
   <script src="js/javascript.js?version=20180326"></script>
   <script src="js/WXmain.js?version=20180326"></script>
   <script src="js/animation.js?version=20180326"></script>
+  <script src="js/course.js?version=20180403"></script>
 </body>
 </html>

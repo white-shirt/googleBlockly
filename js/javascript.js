@@ -81,8 +81,7 @@ Blockly.JavaScript["blockly_earcolor"] = function (block) {
 	}
 	var dropdown_light = block.getFieldValue("LIGHT");
 	var dropdown_blink = block.getFieldValue("BLINK");
-	var dropdown_time = block.getFieldValue("TIME");
-	var code = "earColor(" + colour_color + "," + dropdown_blink + "," + dropdown_time + "," + dropdown_light + ");" + "\n";
+	var code = "earColor(" + colour_color + "," + dropdown_blink + "," + 0 + "," + dropdown_light + ");" + "\n";
 	return code;
 };
 Blockly.JavaScript['blockly_eyelight'] = function(block) {
@@ -102,6 +101,16 @@ Blockly.JavaScript['blockly_customizecolor'] = function(block) {
 Blockly.JavaScript['blockly_closelight'] = function(block) {
   var code = '...;\n';
   // return code;
+};
+Blockly.JavaScript['blockly_eyeswitch'] = function(block) {
+  var text_left = block.getFieldValue('left');
+  var text_right = block.getFieldValue('right');
+  var number_time = block.getFieldValue('time') * 1000;
+	var reg = /^[0-9a-fA-F]$/;
+	text_left = parseInt(text_left, 16);
+	text_right = parseInt(text_right, 16);
+  var code = "eyeSwitch(" + text_left + "," + text_right + "," + number_time + ");" + "\n";
+  return code;
 };
 Blockly.JavaScript['blockly_math_plus'] = function(block) {
   var value_value_1 = Blockly.JavaScript.valueToCode(block, 'value_1', Blockly.JavaScript.ORDER_ATOMIC);
@@ -303,18 +312,25 @@ Blockly.JavaScript['blockly_ifelse'] = function (block) {
 };
 Blockly.JavaScript["blockly_tracking"] = function (block) {
 	var number_time = block.getFieldValue("TIME");
-	var code = "mode('tracking'," + number_time + ");" + "\n";
+	var number_speed = block.getFieldValue("SPEED");
+	var code = "mode('tracking'," + number_speed + ',' + number_time + ");" + "\n";
 	return code;
 };
 Blockly.JavaScript["blockly_obsessive"] = function (block) {
 	var number_time = block.getFieldValue("TIME");
-	var code = "mode('obsessive'," + number_time + ");" + "\n";
+	var number_speed = block.getFieldValue("SPEED");
+	var code = "mode('obsessive',"+ number_speed + ',' + number_time + ");" + "\n";
 	return code;
 };
 Blockly.JavaScript["blockly_follow"] = function (block) {
 	var number_time = block.getFieldValue("TIME");
-	var code = "mode('follow'," + number_time + ");" + "\n";
+	var code = "mode('follow'," + 0 + ',' + number_time + ");" + "\n";
 	return code;
+};
+Blockly.JavaScript['blockly_trackingdir'] = function(block) {
+  var dropdown_direction = block.getFieldValue('direction');
+  var code = "trackingMode(" + dropdown_direction + ")" + "\n";
+  return code;
 };
 Blockly.JavaScript['blockly_btmsensor'] = function(block) {
   var statements_onground = Blockly.JavaScript.statementToCode(block, 'onground');

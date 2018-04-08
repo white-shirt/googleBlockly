@@ -83,7 +83,7 @@ function initmathAnswer() {
 	mathProblem.innerHTML = num1 + "+" + num2 + "+" + num3 + "=" + "?";
 	findmathProblem.innerHTML = num1 + "+" + num2 + "+" + num3 + "=" + "?";
 }
-initmathAnswer();
+initmathAnswer();      
 /*
  * initmathAnswer end
  */
@@ -594,7 +594,7 @@ upImage.addEventListener("change", function(e) {
 			 */
 			var formData = new FormData($("#upImage")[0]);
 			$.ajax({
-				url : 'uploading' + "/" + curphoneNum, /* 这是处理文件上传的servlet */
+				url : 'uploading/' + curphoneNum, /* 这是处理文件上传的servlet */
 				type : 'POST',
 				data : formData,
 				async : false,

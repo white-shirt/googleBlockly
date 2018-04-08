@@ -152,7 +152,7 @@ Blockly.Blocks["blockly_differential_control"] = {
 };
 Blockly.Blocks["blockly_earcolor"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("耳朵颜色").appendField(new Blockly.FieldColour("#ff0000"), "COLOR").appendField("闪烁").appendField(new Blockly.FieldDropdown([["慢闪", "5"], ["快闪", "20"], ["常亮", "0"]]), "BLINK").appendField("时间").appendField(new Blockly.FieldDropdown([["5秒", "5"], ["30秒", "30"], ["60秒", "60"]]), "TIME").appendField("亮度").appendField(new Blockly.FieldDropdown([["暗", "50"], ["正常", "150"], ["亮", "250"]]), "LIGHT");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("耳朵颜色").appendField(new Blockly.FieldColour("#ff0000"), "COLOR").appendField("闪烁").appendField(new Blockly.FieldDropdown([["慢闪", "5"], ["快闪", "20"], ["常亮", "0"]]), "BLINK").appendField("亮度").appendField(new Blockly.FieldDropdown([["暗", "50"], ["正常", "150"], ["亮", "250"]]), "LIGHT");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#fec002");
@@ -205,6 +205,25 @@ Blockly.Blocks['blockly_closelight'] = {
 		this.setHelpUrl("");
 	}
 };
+Blockly.Blocks['blockly_eyeswitch'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .setAlign(Blockly.ALIGN_CENTRE)
+		  .appendField("眼睛灯光控制 ")
+		  .appendField(" 左眼0x")
+		  .appendField(new Blockly.FieldTextInput(""), "left")
+		  .appendField(" 右眼0x")
+		  .appendField(new Blockly.FieldTextInput(""), "right")
+		  .appendField("时间")
+		  .appendField(new Blockly.FieldNumber(10, 1, 500, 1), "time")
+		  .appendField("秒");
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour("#fec002");
+      this.setTooltip("");
+      this.setHelpUrl("");
+	}
+};
 Blockly.Blocks["blockly_play"] = {
 	init: function () {
 		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("播放音乐").appendField(new Blockly.FieldDropdown([["随机播放", "0"], ["Head shoulders kness...", "41"], ["Bingo", "42"], ["Donkey", "43"], ["Food I Like", "44"], ["Little Star", "45"], ["Long long ago", "46"], ["乖乖大小姐", "47"], ["拍拍手", "48"], ["三只小熊", "49"], ["洋娃娃和小熊跳舞", "50"]]), "MUSIC").appendField(new Blockly.FieldDropdown([["等待", "0"], ["继续", "1"]]), "WAIT");
@@ -217,7 +236,7 @@ Blockly.Blocks["blockly_play"] = {
 };
 Blockly.Blocks["blockly_animal"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("动物声音").appendField(new Blockly.FieldDropdown([["随机播放", "0"], ["猫", "1"], ["狗", "2"], ["公鸡", "3"], ["狮子", "4"], ["大象", "5"], ["青蛙", "6"], ["绵羊", "7"], ["鸭子", "8"], ["马", "11"], ["啄木鸟", "12"]]), "animal").appendField(new Blockly.FieldDropdown([["等待", "0"], ["继续", "1"]]), "WAIT");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("动物声音").appendField(new Blockly.FieldDropdown([["随机播放", "0"], ["猫", "1"], ["狗", "2"], ["公鸡", "3"], ["狮子", "4"], ["大象", "5"], ["青蛙", "6"], ["绵羊", "7"], ["鸭子", "8"], ["马", "9"], ["啄木鸟", "10"]]), "animal").appendField(new Blockly.FieldDropdown([["等待", "0"], ["继续", "1"]]), "WAIT");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#d80381");
@@ -257,7 +276,7 @@ Blockly.Blocks['blockly_secret'] = {
 	  this.appendDummyInput()
 		  .setAlign(Blockly.ALIGN_CENTRE)
 		  .appendField("\"蛋仔\"的小秘密")
-		  .appendField(new Blockly.FieldDropdown([["随机","0"], ["兴趣爱好","31"], ["超能力","32"], ["梦想","33"], ["上山打老虎","34"], ["特长","35"], ["喜欢的人","36"], ["喜欢的食物","37"], ["喜欢的事","38"], ["星座","39"], ["自我介绍", "40"]]), "secrets")
+		  .appendField(new Blockly.FieldDropdown([["随机","0"], ["兴趣爱好","31"], ["超能力","32"], ["梦想","33"], ["特长","35"], ["喜欢的人","36"], ["喜欢的食物","37"], ["喜欢的事","38"], ["星座","39"], ["自我介绍", "40"]]), "secrets")
 		  .appendField(new Blockly.FieldDropdown([["等待","0"], ["继续","1"]]), "wait");
 	  this.setPreviousStatement(true, null);
 	  this.setNextStatement(true, null);
@@ -305,7 +324,7 @@ Blockly.Blocks["blockly_div"] = {
 };
 Blockly.Blocks["blockly_tracking"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("\"蛋仔\"进入巡线模式").appendField(new Blockly.FieldNumber(0, 6, 1000, 1), "TIME").appendField("秒");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("\"蛋仔\"进入巡线模式").appendField("速度").appendField(new Blockly.FieldDropdown([["正常", "80"], ["快", "120"], ["超快", "160"]]), "SPEED").appendField(new Blockly.FieldNumber(0, 6, 1000, 1), "TIME").appendField("秒");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#01c1b6");
@@ -315,7 +334,7 @@ Blockly.Blocks["blockly_tracking"] = {
 };
 Blockly.Blocks["blockly_obsessive"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("\"蛋仔\"进入避障模式").appendField(new Blockly.FieldNumber(0, 6, 1000, 1), "TIME").appendField("秒");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("\"蛋仔\"进入避障模式").appendField("速度").appendField(new Blockly.FieldDropdown([["正常", "80"], ["快", "120"], ["超快", "160"]]), "SPEED").appendField(new Blockly.FieldNumber(0, 6, 1000, 1), "TIME").appendField("秒");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#01c1b6");
@@ -331,6 +350,19 @@ Blockly.Blocks["blockly_follow"] = {
 		this.setColour("#01c1b6");
 		this.setTooltip("");
 		this.setHelpUrl("")
+	}
+};
+Blockly.Blocks['blockly_trackingdir'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .setAlign(Blockly.ALIGN_CENTRE)
+		  .appendField("十字路口-寻线")
+		  .appendField(new Blockly.FieldDropdown([["前进一步","1"], ["左转弯","2"], ["右转弯","3"], ["掉头","4"]]), "direction");
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour("#01c1b6");
+	  this.setTooltip("");
+	  this.setHelpUrl("");
 	}
 };
 Blockly.Blocks['blockly_btmsensor'] = {

@@ -92,9 +92,25 @@ var play = function play(a, b, c) {
     var playData = { "cmd": 2, "data": [7, SDindex, b, c] };
     codeArr.push(playData);
 };
-var mode = function mode(a, b) {
-    var modeData = { "cmd": a, "data": [b] };
+var mode = function mode(a, b, c) {
+    var modes;
+    switch (a) {
+        case 'tracking':
+            modes = 31;
+            break;
+        case 'obsessive':
+            modes = 32;
+            break;
+        case 'follow':
+            modes = 33;
+            break;
+    }
+    var modeData = { "cmd": 8, "data": [modes, b, c] };
     codeArr.push(modeData);
+};
+var trackingMode = function trackingMode(a) {
+    var trackingModeData = { "cmd": 7, "data": [a] };
+    codeArr.push(trackingModeData);
 };
 var differential = function differential(a, b, c) {
     a > 0 ? (a = Math.ceil(a / 50)) : (a = Math.ceil(Math.abs(a) / 50) + 4);
@@ -155,6 +171,10 @@ var eyeSensor = function eyeSensor(a,b) {
             break;
     };
     codeArr.push(eyeSensorData);
+}
+var eyeSwitch = function eyeSwitch(a,b,c) {
+    var eyeswitchData = { "cmd": 4, "data":[a, b, c] };
+    codeArr.push(eyeswitchData);
 }
 /* blocks constructor function end */
 var startEvt, moveEvt, endEvt;
