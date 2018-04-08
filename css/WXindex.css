@@ -1,0 +1,641 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "微软雅黑", Tahoma, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+#blocklyDiv {
+    width: 100%;
+    height: 100%;
+}
+
+.blocklyMainWorkspaceScrollbar {
+    display: none;
+}
+
+/*start Btn*/
+
+.btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: yellowgreen;
+    bottom: 110px;
+    left: 10px;
+    z-index: 100;
+    opacity: 1;
+    filter: Alpha(opacity(100));
+    z-index: 20004;
+}
+
+.btn .btn_icon {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 32px/12px;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 25px solid #fff;
+    margin-left: 8px;
+    margin-top: 1px;
+    transform: scale(0.6);
+}
+
+.btnJump {
+    animation-name: bJ;
+    animation-duration: 500ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: bJ;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;   
+}
+
+@keyframes bJ{
+    0% {bottom: 110px}
+    5% {bottom: 150px}
+    20% {bottom: 110px}
+    45% {bottom: 130px}
+    50% {bottom: 110px}
+    65% {bottom: 120px}
+    70% {bottom: 110px}
+    85% {bottom: 115px}
+    100% {bottom: 110px}
+}
+
+@-webkit-keyframes bJ{
+    0% {bottom: 110px}
+    5% {bottom: 150px}
+    20% {bottom: 110px}
+    45% {bottom: 130px}
+    50% {bottom: 110px}
+    65% {bottom: 120px}
+    70% {bottom: 110px}
+    85% {bottom: 115px}
+    100% {bottom: 110px}
+}
+
+/*start Btn end*/
+/*sidebar Btn*/
+
+.sideBarBtn {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    left: 10px;
+    bottom: 50px;
+    background: yellowgreen;
+    border-radius: 50%;
+    z-index: 20003;
+}
+
+.sideBarBtn .Btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+    margin-top: -11px;
+}
+
+.sideBarBtn .Btn .Btn_line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin-top: 4px;
+    background: #fff;
+}
+
+.sideBarBtn .Btn .Btn_top_clockwise {
+    -webkit-animation-name: Btc;
+    animation-name: Btc;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Btc {
+    from {}
+    to {
+        -webkit-transform: translateY(6px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
+    }
+}
+
+@-webkit-keyframes Btc {
+    from {}
+    to {
+        -webkit-transform: translateY(6px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
+    }
+}
+
+.sideBarBtn .Btn .Btn_mid_hide {
+    -webkit-animation-name: Bmh;
+    animation-name: Bmh;
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Bmh {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes Bmh {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.sideBarBtn .Btn .Btn_bottom_anticlockwise {
+    -webkit-animation-name: Bba;
+    animation-name: Bba;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Bba {
+    from {}
+    to {
+        -webkit-transform: translateY(-6px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+    }
+}
+
+@-webkit-keyframes Bba {
+    from {}
+    to {
+        -webkit-transform: translateY(-6px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+    }
+}
+
+.sideBarBtn .Btn .Btn_top_anticlockwise {
+    -webkit-animation-name: Bta;
+    animation-name: Bta;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Bta {
+    from {
+        -webkit-transform: translateY(6px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
+    }
+    to {
+        -webkit-transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@-webkit-keyframes Bta {
+    from {
+        -webkit-transform: translateY(6px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
+    }
+    to {
+        -webkit-transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.sideBarBtn .Btn .Btn_mid_show {
+    -webkit-animation-name: Bms;
+    animation-name: Bms;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Bms {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes Bms {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.sideBarBtn .Btn .Btn_bottom_clockwise {
+    -webkit-animation-name: Bbc;
+    animation-name: Bbc;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes Bbc {
+    from {
+        -webkit-transform: translateY(-6px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+    }
+    to {
+        -webkit-transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@-webkit-keyframes Bbc {
+    from {
+        -webkit-transform: translateY(-6px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
+    }
+    to {
+        -webkit-transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+
+/*sidebar Btn end*/
+
+
+/*sidebar content*/
+
+input {
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    height: 35px;
+    border-radius: 4px;
+    border:none;
+    color:#6a6f77;
+    background: #fff;
+    -webkit-appearance: none;
+    outline: 0px;
+    text-decoration: none;
+}
+
+.mask {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    opacity: 0.7;
+    filter: Alpha(opacity=70);
+    z-index: 20001;
+}
+
+.sidebarWrap {
+    position: absolute;
+    bottom: -60%;
+    width: 100%;
+    height: 60%;
+    box-sizing: border-box;
+    padding: 60px 10px 10px;
+    background: #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 20002;
+}
+
+.contentLogo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    left: 50%;
+    margin-left: -50px;
+    border-radius: 50px;
+    background: url('../img/contentLogo.png') no-repeat;
+    background-size: cover;
+    background-position: -208px 0;
+    box-shadow: 0px 2px 10px #888;
+}
+
+.contentLogolist {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.contentWrap {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebarContent {
+    width: 100%;
+    height: auto;
+}
+
+.workspaceToCode {
+    display: none;
+    width: 100%;
+    height: auto;
+    white-space: pre-wrap;
+    font-size: 13px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+}
+
+.saveWorkspace {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.card {
+    width: 75%;
+    height: auto;
+    min-height: 120px;
+    margin: 30px auto 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 2px 5px rgb(206, 206, 206);
+    background: #ffd600;   
+}
+
+.saveCard {
+    position: relative;
+    text-align: center;
+}
+
+#saveFile {
+    width: 80%;
+    margin-top: 25px;
+}
+
+.saveError {
+    display: block;
+    font-size: 12px;
+    color: red;
+}
+
+.bottomBtn {
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    bottom: 0;
+    background: #fff;
+}
+
+.saveShareBtn {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+    line-height: 35px;  
+    cursor: pointer;
+}
+
+.localCard {
+    position: relative;
+}
+
+.localCardTitle {
+    width: 100%;
+    height: 35px;
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+    line-height: 35px;
+    background: #fff;
+}
+
+.clickGetFile {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #999;
+    line-height: 80px;
+    text-align: center;
+}
+
+.fileWrap {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.filelist {
+    width: 90%;
+    height: 30px;
+    margin: 10px auto;
+}
+
+.fileInfo {
+    width: 70%;
+    height: 30px;
+    border-radius: 5px;
+    background: #fff;
+    float: left;
+}
+
+.fileName {
+    display: inline-block;
+    font-size: 12px;
+    text-align: left;
+    line-height: 30px;
+    color: #555;
+    width: 50%;
+    height: 30px;
+    padding-left: 10px;
+    float: left;
+    overflow: hidden;
+}
+
+.saveTime {
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    color: #999;
+    width: 50%;
+    height: 30px;
+    float: right;
+}
+
+.fileBtn {
+    width: 30%;
+    height: 30px;
+    float: right;
+}
+
+.deleteFile {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: url('../img/deleteshare.png'); 
+    background-size: cover;
+    background-position: 0 0;
+    float: left;
+    margin: 4px 0 0 15px;
+}
+
+.shareFile {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: url('../img/deleteshare.png'); 
+    background-size: cover;
+    background-position: 22px 0;
+    float: right;
+    margin: 4px 0px 0px;
+}
+
+.course {
+    display: none;
+    width: 100%;
+    height: 500px;
+    background: blueviolet;
+}
+
+.animation {
+    display: block;
+    width: 100%;
+    height: 500px;
+    background: blue;
+}
+
+/*sidebar content end*/
+
+.blocklyPath {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+.blocklyPathDark {
+    fill: none;
+}
+
+/* send progress */
+.progressMask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 20005;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.progress {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 20006;
+}
+
+.circle {
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: rgb(255, 0, 0);
+    box-sizing: border-box;
+    border-radius: 50%;
+    top: -30px;
+    left: -30px;
+    transform: scale(1);
+}
+
+.circleBig {
+    animation-name: cB;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;      
+    -webkit-animation-name: cB;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes cB {
+    from {
+        background: rgb(0, 253, 13);
+    }
+    to {
+        transform: translateX(50px) translateY(50px) scale(5);
+        background: yellowgreen;
+    }
+}
+
+@-webkit-keyframes cB {
+    from {
+        background: rgb(0, 253, 13);
+    }
+    to {
+        transform: translateX(50px) translateY(50px) scale(5);
+        background: yellowgreen;
+    }
+}
+
+.percent {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    line-height: 80px;
+}
+
+/* send progress end */

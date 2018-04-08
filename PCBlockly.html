@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Blockly编程</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="blockly/PCblockly_compressed.js?version=20180326"></script>
+    <script src="blockly/javascript_compressed.js"></script>
+    <script src="blockly/zh-hans.js"></script>
+    <script src="js/blocks.js?version=20180326"></script>
+    <script src="js/javascript.js?version=20180326"></script>
+    <link rel="stylesheet" href="css/PCindex.css?version=20180326">
+</head>
+
+<body>
+    <div class="progressMask">
+        <div class="progress">
+            <span class="circle"></span>
+            <span class="percent">0%</span>
+        </div>
+    </div>
+    <div class="btn">
+        <div class="btn_icon"></div>
+    </div>
+    <div class="mask mask_blur"></div>
+    <div class="UsInfoBox">
+        <span class="closeBox">关闭</span>
+        <div class="upedImg"></div>
+        <a href="javascript:;" class="upImage">
+            选择并上传图片
+            <form id="uploadform"><input type="file" enctype ="multipart/form-data" id="upImage" accept="image/jpg,image/png" /></form>
+        </a>
+        <div class="newUsInfoWrap">
+            <input type="text" id="newUsName" maxlength="11" placeholder="新用户名" />
+            <div class="newBirthWrap">
+                <input type="number" id="newUsMonth" name="newUsMonth" min="1" max="12" placeholder="2" />
+                <label for="newUsMonth" style="font-size:12px; color:#555;">月</label>
+                <input type="number" id="newUsDay" name="newUsDay" min="1" max="31" placeholder="29" />
+                <label for="newUsDay" style="font-size:12px; color:#555;">日</label>
+            </div>
+            <div class="newUsOtherInfo">
+                <select name="newUsGradeSel" id="newUsGradeSel">
+                    <option value="幼儿园">幼儿园</option>
+                    <option value="小学">小学</option>
+                    <option value="初中">初中</option>
+                    <option value="高中">高中</option>
+                </select>
+                <input type="number" id="newUsAge" min="3" max="18" placeholder="几岁啦？" />
+                <select name="newUsSex" id="newUsSex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="uploadNewInfo">保存</div>
+    </div>
+    <div class="rightSidebar">
+        <div class="signInLogo">
+            <span class="logoBg"></span>
+            <span class="signInTitle">登录</span>
+        </div>
+        <span class="line"></span>
+        <div class="signInWrap">
+            <div class="stateSwitch userInfoWrap hide">
+                <div class="useravatar"></div>
+                <div class="userInfo">
+                    <span class="midifyUserInfo">修改</span>
+                    <span class="userName"></span>
+                    <ul class="userBasicInfo">
+                        <li class="basicInfolist">
+                            <span class="userColumn">生日</span>
+                            <span class="userColumnInfo userBirthday"></span>
+                        </li>
+                        <li class="basicInfolist">
+                            <span class="userColumn">学级</span>
+                            <span class="userColumnInfo userGrade"></span>
+                        </li>
+                        <li class="basicInfolist">
+                            <span class="userColumn">年龄</span>
+                            <span class="userColumnInfo userAge"></span>
+                        </li>
+                        <li class="basicInfolist">
+                            <span class="userColumn">性别</span>
+                            <span class="userColumnInfo userSex"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stateSwitch weChatSignIn hide">
+                <div class="QRcode"></div>
+                <div class="QRcodebotBtn">
+                    <p class="QRsignInBtn">手机号<span router="signIn">登录</span></p>
+                    <p class="QRregisterBtn"><span router="register">立即注册</span></p>
+                </div>
+            </div>
+            <div class="stateSwitch equipmentList hide">
+                <p class="curEquipment">当前使用设备:<span>未选择</span></p>
+            </div>
+            <div class="stateSwitch signIn show">
+                <form id="signInform">
+                    <p>
+                        <input type="text" id="signInUsername" name="signInUsername" onblur = "Checkphone()" placeholder="注册手机号码" />
+                        <span class="error signInUsernameError" style="display:none">用户名或密码错误</span>
+                    </p>
+                    <p>
+                        <input type="password" id="signInPassword" name="signInPassword" placeholder="登录密码" />
+                    </p>
+                </form>
+                <div id="signInBtn">登 录</div>
+                <div class="signInbotBtn">
+                    <p class="signInregisterBtn"><span class="routerRegister" router="register">注册 </span><span class="routerQRcode" router="weChatSignIn"> | 扫码登录</span></p>
+                    <p class="forgotPasswordBtn" router="retrieve">忘记密码?</p>
+                </div>
+            </div>
+            <div class="stateSwitch register hide">
+                <form id="registerform">
+                    <p>
+                        <input type="text" id="registerPhoneNum" name="registerPhoneNum" onblur="Checkphone()" placeholder="请输入手机号" />
+                        <span class="error phoneError" style="display:none;">手机号错误</span>
+                    </p>
+                    <p>
+                        <input type="password" id="registerPassword" name="registerPassword" onblur="confirmPd()" placeholder="请输入登录密码" />
+                    </p>
+                    <p>
+                        <input type="password" id="confirmPassword" name="confirmPassword" onblur="confirmPd()" placeholder="请再次输入登录密码" />
+                        <span class="error confirmPasswordError" style="display:none;">密码不一致</span>
+                    </p>
+                    <p>
+                        <input type="text" id="macAddress" name="macAddress" onblur="checkMac()" placeholder="请输入&quot;蛋仔&quot;底部MAC地址" />
+                        <span class="error macAddressError" style="display:none;">请仔细确认MAC地址</span>
+                    </p>
+                    <p>
+                        <input type="text" id="mathAnswer" name="mathAnswer" onblur="checkmathProblem()" placeholder="你的答案" />
+                        <span id="mathProblem"></span>
+                        <span class="error mathError" style="display:none;">答案错误</span>
+                    </p>
+                    <p>
+                        <input type="text" id="identifyCode" name="identifyCode" onblur="checkidentifyCode()" placeholder="验证码" />
+                        <span id="receiveIdentifyCode">获取短信验证码</span>
+                        <span class="error identifyError" style="display:none;">验证码错误</span>
+                    </p>
+                </form>
+                <div id="registerBtn">立即注册</div>
+                <div class="registerbotBtn">
+                    <p class="registerbotBackSignInBtn"><span router="signIn">返回登录</span></p>
+                </div>
+            </div>
+            <div class="stateSwitch retrieve hide">
+                <form id="findPassword">
+                    <p>
+                        <input type="text" id="findPdphoneNum" name="findPdphoneNum" onblur="Checkphone()" placeholder="请输入注册手机号" />
+                        <span class="error findPdphoneNumError" style="display:none;">该手机号未注册</span>
+                    </p>
+                    <p>
+                        <input type="password" id="newPassword" name="newPassword" onblur="checkPwd()" placeholder="重新设置密码">
+                        <span class="error newPasswordError" style="display:none;">密码不能为空</span>
+                    </p>
+                    <p>
+                        <input type="text" id="findmathAnswer" name="findmathAnswer" onblur="checkmathProblem()" placeholder="你的答案" />
+                        <span id="findmathProblem"></span>
+                        <span class="error findmathError" style="display:none;">答案错误</span>
+                    </p>
+                    <p>
+                        <input type="text" id="retrieveIdentifyCode" name="retrieveIdentifyCode" onblur="checkidentifyCode()" placeholder="验证码" />
+                        <span id="retrieveIdentifyBtn">获取短信验证码</span>
+                        <span class="error retrieveIdentifyError" style="display:none;">验证码错误</span>    
+                    </p>
+                </form>
+                <div id="confirmModifyBtn">确认修改</div>
+                <div class="retrievebotBtn">
+                    <p class="retrievebotBackSignInBtn"><span router="signIn">返回登录</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="BlocklyLogo"></div>
+    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+        <category name="控制 Control" colour="#008c97">
+            <block type="blockly_pause"></block>
+            <block type="blockly_loop"></block>
+            <block type="blockly_controls_for"></block>
+            <block type="blockly_if"></block>
+            <block type="blockly_ifelse"></block>
+        </category>
+        <category name="运动 Movement" colour="#f5821f">
+            <block type="blockly_front"></block>
+            <block type="blockly_back"></block>
+            <block type="blockly_left"></block>
+            <block type="blockly_right"></block>
+            <block type="blockly_rotate"></block>
+            <block type="blockly_turnleft"></block>
+            <block type="blockly_turnright"></block>
+            <block type="blockly_differential"></block>
+            <block type="blockly_differential_control"></block>
+        </category>
+        <category name="灯光 Light Effect" colour="#fec002">
+            <block type="blockly_earcolor"></block>
+            <block type="blockly_eyelight" disabled="true"></block>
+            <block type="blockly_customizecolor" disabled="true"></block>
+            <block type="blockly_closelight" disabled="true"></block>
+        </category>
+        <category name="声音 Sound" colour="#d80381">
+            <block type="blockly_animal"></block>
+            <block type="blockly_speak"></block>
+            <block type="blockly_note"></block>
+            <block type="blockly_play"></block>
+            <block type="blockly_secret"></block>
+        </category>
+        <category name="数学 Math" colour="#01bee6">
+            <block type="blockly_math_plus"></block>
+            <block type="blockly_math_sub"></block>
+            <block type="blockly_math_mul"></block>
+            <block type="blockly_math_div"></block>
+            <block type="blockly_isoddevenprime"></block>
+            <block type="blockly_logic_or"></block>
+            <block type="blockly_logic_and"></block>
+            <block type="blockly_number"></block>
+        </category>
+        <category name="模式 Sensor" colour="#01c1b6">
+            <block type="blockly_tracking" disabled="true"></block>
+            <block type="blockly_obsessive" disabled="true"></block>
+            <block type="blockly_follow" disabled="true"></block>
+            <block type="blockly_btmsensor"></block>
+            <block type="blockly_eyesensor"></block>
+        </category>
+        <category name="测试" colour="#00c25f">
+            <block type="blockly_math_sub" disabled="true"></block>
+            <block type="blockly_number" disabled="true"></block>
+        </category>
+    </xml>
+    <script src="js/login.js?version=20180326"></script>
+    <script src="blockly/storage.js"></script>
+    <script src="js/Blocklyindex.js?version=20180326"></script>
+    <script src="js/PCmain.js?version=20180326"></script>
+</body>
+
+</html>

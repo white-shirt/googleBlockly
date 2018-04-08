@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Blockly编程</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="blockly/WXblockly_compressed.js?version=20180326"></script>
+    <script src="blockly/javascript_compressed.js"></script>
+    <script src="blockly/zh-hans.js"></script>
+    <script src="js/blocks.js?version=20180326"></script>
+    <link rel="stylesheet" href="css/WXindex.css?version=20180326" />
+</head>
+<body>
+    <div class="progressMask">
+        <div class="progress">
+          <span class="circle"></span>
+          <span class="percent">0%</span>
+        </div>
+    </div>
+    <div class="btn">
+      <div class="btn_icon"></div>
+    </div>
+    <div class="sideBarBtn">
+      <ul class="Btn">
+        <li class="Btn_line BtnTop"></li>
+        <li class="Btn_line BtnMid"></li>
+        <li class="Btn_line BtnBottom"></li>
+      </ul>
+    </div>
+    <div class="sidebarWrap">
+      <div class="contentLogo"></div>
+      <div class="contentWrap">
+          <!-- <div class="sidebarContent animation">
+              animation
+          </div> -->
+          <div class="sidebarContent saveWorkspace">
+            <div class="card saveCard">
+              <input type="text" id="saveFile" name="saveFile" placeholder="请输入作品名称" />
+              <span class="saveError"></span>
+              <div class="bottomBtn">
+                <span class="saveShareBtn shareBtn">分享</span>  
+                <span class="saveShareBtn saveBtn">保存</span>  
+              </div> 
+            </div>       
+            <div class="card localCard">
+              <div class="localCardTitle">已保存的文件</div>
+              <span class="clickGetFile" style="display:block;">点击获取已保存文件</span>
+              <div class="fileWrap" style="display:none;">
+                <ul class="fileUl">
+                  <li class="filelist" style="display:none;">
+                    <div class="fileInfo">
+                      <span class="fileName"></span>
+                      <span class="saveTime"></span>
+                    </div>
+                    <div class="fileBtn">
+                      <div class="deleteFile"></div>
+                      <div class="shareFile"></div>
+                    </div>
+                  </li>
+                </ul>  
+              </div>
+            </div>       
+          </div>
+          <div class="sidebarContent workspaceToCode"></div>
+          <!-- <div class="sidebarContent course">
+              course
+          </div> -->
+          <ul class="navDot">
+            <li class="navList workspaceToCodeDot"></li>
+            <li class="navList saveWorkspaceDot"></li>
+            <li class="navList courseDot"></li>
+            <li class="navList animationDot"></li>
+          </ul>
+      </div>
+    </div>
+    <div class="mask mask_blur"></div>
+    <div id="blocklyDiv" style="position: absolute"></div>
+    <xml id="toolbox" style="display: none">
+      <category name="控制" colour="#008c97">
+        <block type="blockly_pause"></block>
+        <block type="blockly_loop"></block>
+        <block type="blockly_controls_for"></block>
+        <block type="blockly_if"></block>
+        <block type="blockly_ifelse"></block>
+      </category>
+      <category name="运动" colour="#f5821f">
+        <block type="blockly_front"></block>
+        <block type="blockly_back"></block>
+        <block type="blockly_left"></block>
+        <block type="blockly_right"></block>
+        <block type="blockly_rotate"></block>
+        <block type="blockly_turnleft"></block>
+        <block type="blockly_turnright"></block>
+        <block type="blockly_differential"></block>
+        <block type="blockly_differential_control"></block>
+      </category>
+      <category name="灯光" colour="#fec002">
+        <block type="blockly_earcolor"></block>
+        <block type="blockly_eyelight" disabled="true"></block>
+        <block type="blockly_customizecolor" disabled="true"></block>
+        <block type="blockly_closelight" disabled="true"></block>
+      </category>
+      <category name="播放" colour="#d80381">
+        <block type="blockly_animal"></block>
+        <block type="blockly_speak"></block>
+        <block type="blockly_note"></block>
+        <block type="blockly_play"></block>
+        <block type="blockly_secret"></block>
+      </category>
+      <category name="运算" colour="#01bee6">
+        <block type="blockly_math_plus"></block>
+        <block type="blockly_math_sub"></block>
+        <block type="blockly_math_mul"></block>
+        <block type="blockly_math_div"></block>
+        <block type="blockly_isoddevenprime"></block>
+        <block type="blockly_logic_or"></block>
+        <block type="blockly_logic_and"></block>
+        <block type="blockly_number"></block>
+      </category>
+      <category name="识别" colour="#01c1b6">
+        <block type="blockly_tracking" disabled="true"></block>
+        <block type="blockly_obsessive" disabled="true"></block>
+        <block type="blockly_follow" disabled="true"></block>
+        <block type="blockly_btmsensor"></block>
+        <block type="blockly_eyesensor"></block>
+      </category>
+      <category name="测试" colour="#00c25f">
+        <block type="blockly_math_sub" disabled="true"></block>
+        <block type="blockly_number" disabled="true"></block>
+      </category>
+    </xml>
+  <script src="blockly/storage.js"></script>
+  <script src="js/Blocklyindex.js?version=20180326"></script>
+  <script src="js/javascript.js?version=20180326"></script>
+  <script src="js/WXmain.js?version=20180326"></script>
+  <script src="js/animation.js?version=20180326"></script>
+</body>
+</html>

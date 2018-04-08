@@ -1,0 +1,866 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "Microsoft Yahei", Tahoma, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    min-width: 1400px;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.clearfix:after{
+    content:"";
+    height:0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+
+#blocklyDiv {
+    height: 100%;
+    min-width: 1000px;
+    margin-right: 500px;
+}
+
+.blocklyMainWorkspaceScrollbar {
+    display: none;
+}
+/*logo*/
+.BlocklyLogo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 248px;
+    height: 132px;
+    background: url('../img/BlocklyLogo.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 19999;
+}
+/*logo end*/
+
+/*start button*/
+
+.btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: yellowgreen;
+    bottom: 110px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 20004;
+}
+
+.btn .btn_icon {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 32px/12px;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 25px solid rgb(255, 255, 255);
+    margin-left: 8px;
+    margin-top: 1px;
+    transform: scale(0.6);
+}
+
+.btnJump {
+    animation-name: bJ;
+    animation-duration: 500ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: bJ;
+    -webkit-animation-duration: 500ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;   
+}
+
+@keyframes bJ{
+    0% {bottom: 110px}
+    5% {bottom: 150px}
+    20% {bottom: 110px}
+    45% {bottom: 130px}
+    50% {bottom: 110px}
+    65% {bottom: 120px}
+    70% {bottom: 110px}
+    85% {bottom: 115px}
+    100% {bottom: 110px}
+}
+
+@-webkit-keyframes bJ{
+    0% {bottom: 110px}
+    5% {bottom: 150px}
+    20% {bottom: 110px}
+    45% {bottom: 130px}
+    50% {bottom: 110px}
+    65% {bottom: 120px}
+    70% {bottom: 110px}
+    85% {bottom: 115px}
+    100% {bottom: 110px}
+}
+
+
+/*start button end*/
+
+.mask {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    opacity: 0.7;
+    filter: Alpha(opacity=70);
+    z-index: 20001;
+}
+
+
+.blocklyPath {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+.blocklyPathDark {
+    fill: none;
+}
+
+/* progress */
+.progressMask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 20005;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.progress {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 20006;
+}
+
+.circle {
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: rgb(255, 0, 0);
+    box-sizing: border-box;
+    border-radius: 50%;
+    top: -30px;
+    left: -30px;
+    transform: scale(1);
+}
+
+.circleBig {
+    animation-name: cB;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;      
+    -webkit-animation-name: cB;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes cB {
+    from {
+        background: rgb(0, 253, 13);
+    }
+    to {
+        transform: translateX(50px) translateY(50px) scale(5);
+        background: yellowgreen;
+    }
+}
+
+@-webkit-keyframes cB {
+    from {
+        background: rgb(0, 253, 13);
+    }
+    to {
+        transform: translateX(50px) translateY(50px) scale(5);
+        background: yellowgreen;
+    }
+}
+
+.percent {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    line-height: 80px;
+}
+
+/* progress end */
+
+/* right sideBar */
+
+.rightSidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: 100%;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    font-size: 14px;
+    overflow: auto;
+    z-index: 100;
+    /* display: none; */
+}
+
+input {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 14px;
+    height: 35px;
+    border-radius: 4px;
+    border: 2px solid #c8cccf;
+    color:#6a6f77;
+    background: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+    padding: 0 5px;
+    text-decoration: none;
+}
+
+input:focus {
+    border: 2px solid rgb(201, 162, 24);
+}
+
+input::-webkit-input-placeholder{
+    color:rgb(204, 203, 203);
+}
+
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:rgb(204, 203, 203);
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:rgb(204, 203, 203);
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:rgb(204, 203, 203);
+}
+
+label > span {
+    display: inline-block;
+    width: 70px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    text-align-last:justify;/* ie9*/
+    -moz-text-align-last:justify;/*ff*/
+    -webkit-text-align-last:justify;/*chrome 20+*/
+}
+
+.signInLogo {
+    display: block;
+    width: 500px;
+    height: 40px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.signInLogo .logoBg {
+    display: inline-block;
+    width: 210px;
+    height: 26px;
+    background: url('../img/signlogo.png') no-repeat;
+    background-position: center;
+}
+
+.signInLogo .signInTitle {
+    font-size: 18px;
+    font-weight: 500;
+    vertical-align: top;
+}
+
+.line {
+    display: block;
+    width: 400px;
+    height: 1px;
+    margin: 0 auto;
+    background: rgb(221, 221, 221);
+}
+/* signInWrap */
+
+.signInWrap {
+    width: 500px;
+    height: auto;
+}
+
+/* weChatSignIn */
+
+
+
+/* weChatSignIn end */
+
+/* userInfoWrap */
+.userInfoWrap {
+    position: relative;
+    width: 400px;
+    height: 230px;
+    margin: 30px auto 0;    
+}
+
+.useravatar {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    margin-left: -50px;
+    border-radius: 10px;
+    border: 3px solid #e4e4e4;
+    box-sizing: border-box;
+    background-size: 100% 100%;
+    z-index: 100;
+}
+
+.userInfo {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    bottom: 0;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 5px #999;
+    z-index: 90;
+}
+
+.midifyUserInfo {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+}
+
+.UsInfoBox {
+    position: absolute;
+    display: none;
+    width: 500px;
+    height: 600px;
+    left: 50%;
+    top: 50%;
+    margin-top: -300px;
+    margin-left: -250px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 20005;
+}
+
+.closeBox {
+    position: absolute;
+    display: inline-block;
+    font-size: 13px;
+    color: rgb(255, 1, 1);
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.upedImg {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 40px;
+    margin-left: -100px;
+    background: #eee;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 5px #888;
+}
+
+.upedImg::after {
+    content: "不超过50KB的.PNG、.JPG头像";
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    top: 205px;
+}
+
+input[type = "file"] {
+    width: 150px;
+    opacity: 0; 
+    cursor: pointer;
+}
+
+.upImage {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    top: 270px;
+    left: 50%;
+    margin-left: -75px;
+    line-height: 30px;
+    font-size: 13px;
+    text-align: center;
+    background: rgb(255, 200, 0);
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+#upImage {
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.newUsInfoWrap {
+    position: absolute;
+    width: 400px;
+    margin-left: 50px;
+    top: 320px;
+    text-align: center;
+}
+
+#newUsName {
+    width: 180px;
+    float: left;
+}
+
+.newBirthWrap {
+    width: 180px;
+    float: right;
+}
+
+#newUsMonth {
+    width: 65px;
+}
+
+#newUsDay {
+    width: 65px;
+}
+
+.newUsOtherInfo {
+    width: 400px;
+    float: left;
+    margin: 30px auto;
+}
+
+.newUsOtherInfo select {
+    border-radius: 4px;
+    border: 2px solid #c8cccf;
+    color:#6a6f77;
+    text-align: center;
+    background: #fff;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none; 
+}
+
+#newUsGradeSel {
+    display: inline-block;
+    width: 180px;
+    height: 35px;
+    float: left;
+}
+
+#newUsAge {
+    width: 65px;
+    float: left;
+    margin-left: 44px; 
+}
+
+#newUsSex {
+    display: inline-block;
+    width: 65px;
+    height: 35px;  
+}
+
+.newError {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 510px;
+    text-align: center;
+    font-size: 12px;
+    color: red;
+    padding: 0 30px;
+    box-sizing: border-box;
+    word-wrap: break-word; 
+}
+
+.userName {
+    display: inline-block;
+    width: 100%;
+    font-size: 17px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.uploadNewInfo {
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    top: 470px;
+    left: 50%;
+    margin-left: -75px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background: rgb(255, 200, 0);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.userBasicInfo {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(250, 243, 243);
+}
+
+.basicInfolist {
+    flex: 1;
+    -webkit-box-flex: 1;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.userColumn {
+    display: block;
+    font-size: 15px;
+    font-weight: bolder;
+    color: rgb(201, 201, 201);
+}
+
+.userColumnInfo {
+    display: block;
+    font-size: 14px;
+    color: #111;
+    font-weight: bold;
+}
+
+/* userInfoWrap end */
+
+/* 2Dcode */
+.weChatSignIn {
+    width: 500px;
+    height: auto;
+}
+
+.QRcode {
+    width: 260px;
+    height: 260px;
+    margin: 20px auto;
+    background: yellowgreen;
+}
+
+.QRcodebotBtn {
+    width: 260px;
+    height: 35px;
+    font-size: 13px;
+    line-height: 35px;
+    margin: 0 auto;
+}
+
+.QRsignInBtn {
+    float: left;       
+}
+
+.QRsignInBtn span,.QRregisterBtn span {
+    color: #f59901;
+    cursor: pointer; 
+} 
+
+.QRregisterBtn {
+    float: right;
+}
+
+/* 2Dcode end */
+/* equipmentList */
+.equipmentList {
+    width: 260px;
+    height: 200px;
+    max-height: 500px;
+    margin: 20px auto;
+    overflow: auto;
+}
+
+.curEquipment {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* equipmentList end */
+/* singIn */
+
+.signIn {
+    width: 500px;
+    height: auto;
+    text-align: center;
+}
+
+#signInform input {
+    width: 260px;
+}
+
+#signInform p {
+    width: 260px;
+    height: 35px;
+    margin: 30px auto 0;
+}
+
+#signInBtn {
+    width: 260px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+    background:  rgb(255, 200, 0);
+    margin: 30px auto 10px;
+    cursor: pointer;
+}
+
+.signInbotBtn {
+    width: 260px;
+    height: 35px;
+    font-size: 13px;
+    line-height: 35px;
+    margin: 0 auto;
+}
+
+.signInregisterBtn {
+    float: left;
+}
+
+.signInregisterBtn span {
+    color: #f59901;
+    cursor: pointer;
+}
+
+.forgotPasswordBtn {
+    float: right;
+    color: #f59901;
+    cursor: pointer;
+}
+/* signIn end */
+
+/* register */
+
+.register {
+    width: 500px;
+    height: auto;
+}
+
+#registerform p {
+    width: 260px;
+    height: 35px;
+    margin: 30px auto 0;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+} 
+
+#registerform input {
+    width: 260px;
+}
+
+#mathAnswer {
+    width: 80px !important;   
+}
+
+#mathProblem {
+    display: inline-block;
+    float: right;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 35px;
+    background: rgb(255, 200, 0);
+    color: #fff;
+    cursor: pointer;   
+}
+
+#identifyCode {
+    width: 80px !important;
+}
+
+#receiveIdentifyCode {
+    display: inline-block;
+    float: right;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 35px;
+    background: rgb(255, 200, 0);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+#registerBtn {
+    width: 260px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+    background:  rgb(255, 200, 0);
+    margin: 30px auto 10px;
+    cursor: pointer;
+}
+
+.registerbotBtn {
+    width: 260px;
+    height: 35px;
+    font-size: 13px;
+    line-height: 35px;
+    margin: 0 auto;
+}
+
+.registerbotBackSignInBtn {
+    color: #f59901;
+    cursor: pointer;
+}
+
+/* retrieve */
+
+.retrieve {
+    width: 500px;
+    height: auto;  
+}
+
+#findPassword p {
+    width: 260px;
+    height: 35px;
+    margin: 30px auto 0;
+}
+
+#findPassword input {
+    width: 260px;
+}
+
+#findmathAnswer {
+    width: 80px !important;  
+}
+
+#findmathProblem {
+    display: inline-block;
+    float: right;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 35px;
+    background: rgb(255, 200, 0);
+    color: #fff;
+    cursor: pointer;
+}
+
+#retrieveIdentifyCode {
+    width: 80px !important;
+}
+
+#retrieveIdentifyBtn {
+    display: inline-block;
+    float: right;
+    width: 110px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 35px;
+    background: rgb(255, 200, 0);
+    color: #fff;
+    cursor: pointer;
+}
+
+#confirmModifyBtn {
+    width: 260px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+    background:  rgb(255, 200, 0);
+    margin: 30px auto 10px;
+    cursor: pointer;
+}
+
+.retrievebotBtn {
+    width: 260px;
+    height: 35px;
+    font-size: 13px;
+    line-height: 35px;
+    margin: 0 auto; 
+}
+
+.retrievebotBackSignInBtn {
+    color: #f59901;
+    cursor: pointer;
+}
+
+/* retrieve end */
+
+/* signInWrap end */
+/* right sidebar end */
