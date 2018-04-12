@@ -260,6 +260,10 @@ sideBarBtn.addEventListener(startEvt, function (e) {
     workspaceToCode.innerHTML = Blockly.JavaScript.workspaceToCode(workspace);
     BtnMove();
 },false);
+mask.addEventListener('click',function () {
+    sideBarBtn.state = 'opened';
+    BtnMove();    
+},false);
 /* Hamburger Btn animation */
 function BtnMove() {
     if (sideBarBtn.state == 'closed') {
@@ -305,7 +309,7 @@ contentWrap.addEventListener(endEvt, function () {
         sidebarContent[i].style.display = "none";
     }
     sidebarContent[contentIndex].style.display = "block";
-    contentLogo.style.backgroundPositionX = -104 * contentIndex - 104 + "px";
+    contentLogo.style.backgroundPositionX = -104 * contentIndex + "px";
     disX = 0;
 },false);
 /* Hamburger Btn animation end */
@@ -463,8 +467,8 @@ function contentMove(direction, ele) {
     } else {
         ele.animate({ 'bottom': -sidebarWrapHeight + 'px' }, 300, function () {
             ele.css('display', 'none');
+            mask.style.display = 'none';
         });
-        mask.style.display = 'none';
     };
 };
 

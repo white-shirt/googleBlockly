@@ -31,9 +31,15 @@
     <div class="sidebarWrap">
       <div class="contentLogo"></div>
       <div class="contentWrap">
-          <!-- <div class="sidebarContent animation">
-              animation
-          </div> -->
+          <div class="sidebarContent animation">
+            <canvas id="canvasBg"></canvas>
+            <canvas id="Connections"></canvas>
+            <canvas id="drawLine"></canvas>
+            <span id="btn" class="btngroup" data-attr = "start">开始</span>
+            <span id="repeal" class="btngroup" data-attr = "repeal">撤销</span>
+            <span id="add" class="btngroup" data-attr = "add">加</span>
+            <span id="sub" class="btngroup" data-attr = "sub">减</span>
+          </div>
           <div class="sidebarContent saveWorkspace">
             <div class="card saveCard">
               <input type="text" id="saveFile" name="saveFile" placeholder="请输入作品名称" />
@@ -130,8 +136,8 @@
   <script src="blockly/storage.js"></script>
   <script src="js/Blocklyindex.js?version=20180326"></script>
   <script src="js/javascript.js?version=20180326"></script>
+  <script src="js/path.js?version=201804121100"></script>
   <script src="js/WXmain.js?version=20180326"></script>
-  <script src="js/animation.js?version=20180326"></script>
   <script src="js/course.js?version=20180403"></script>
 </body>
 </html>

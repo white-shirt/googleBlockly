@@ -1,23 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-</head>
-<body>
 
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvasBg {
+      position: absolute;
+    }
+
+    #Connections {
+      position: absolute;
+    }
+
+    #drawLine {
+      position: absolute;
+    }
+
+    #btn {
+      position: absolute;
+      top: 500px;
+      left: 450px;
+    }
+
+    #repeal {
+      position: absolute;
+      top: 500px;
+      left: 380px;
+    }
+
+    #add {
+      position: absolute;
+      top: 500px;
+      left: 320px; 
+    }
+
+    #sub {
+      position: absolute;
+      top: 500px;
+      left: 260px; 
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvasBg"></canvas>
+  <canvas id="Connections"></canvas>
+  <canvas id="drawLine"></canvas>
+  <button id="btn" class="btngroup" data-attr = "start">开始</button>
+  <button id="repeal" class="btngroup" data-attr = "repeal">上一步</button>
+  <button id="add" class="btngroup" data-attr = "add">加</button>
+  <button id="sub" class="btngroup" data-attr = "sub">减</button>
   <script>
-    function great() {
-        var reply = [this.person, 'Is An Awesome', this.role].join("|");
-        console.log(reply)
+    /*
+    *  初始化画布
+    */
+
+    var canvasBg = document.querySelector('#canvasBg');
+    var Connections = document.querySelector('#Connections');
+    var drawLine = document.querySelector('#drawLine');
+    var btngroup = document.querySelectorAll('.btngroup');
+    var ctxBg = canvasBg.getContext('2d');
+    var ctxConnections = Connections.getContext('2d');
+    var ctxDrawline = drawLine.getContext('2d');
+    (function initBg() {
+      canvasBg.width = 500;
+      canvasBg.height = 500;
+      canvasBg.style.background = '#eee';
+    })();
+    (function initConnections() {
+      Connections.width = 500;
+      Connections.height = 500;
+      Connections.style.background = "rgba(255,255,255,0)";
+    })();
+    (function initDrawLine() {
+      drawLine.width = 500;
+      drawLine.height = 500;
+      drawLine.style.background = "rgba(255,255,255,0)";
+      var width = drawLine.width, height = drawLine.height;
+      if (window.devicePixelRatio) {
+        drawLine.style.width = width + "px";
+        drawLine.style.height = height + "px";
+        drawLine.height = height * window.devicePixelRatio;
+        drawLine.width = width * window.devicePixelRatio;
+        ctxDrawline.scale(window.devicePixelRatio, window.devicePixelRatio);
+      }
+    })();
+    /*
+    *  命令集合
+    */
+    var sendOrderArr = [];
+    /*
+    *   矩阵点
+    */
+    var ConnectionsObj = function () {
+      this.x = [];
+      this.y = [];
+      this.num = 225;
+      this.r = 3;
+      this.width = 1;
+      this.color = "yellowgreen";
+    };
+    ConnectionsObj.prototype.init = function () {
+      for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
+        this.x[i] = new Array();
+        this.y[i] = new Array();
+        for (var j = 1; j < Math.sqrt(this.num) - 1; j++) {
+          this.x[i][j] = Math.round(Connections.width / (Math.sqrt(this.num) - 1)) * i;
+          this.y[i][j] = Math.round(Connections.height / (Math.sqrt(this.num) - 1)) * j;
+        }
+      }
+    };
+    ConnectionsObj.prototype.draw = function () {
+      ctxConnections.clearRect(0, 0, Connections.width, Connections.height);
+      for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
+        for (var j = 1; j < Math.sqrt(this.num) - 1; j++) {
+          ctxConnections.strokeStyle = this.color;
+          ctxConnections.lineWidth = this.width;
+          ctxConnections.beginPath();
+          ctxConnections.arc(this.x[i][j], this.y[i][j], this.r, 0, 2 * Math.PI);
+          ctxConnections.stroke();
+        }
+      }
+    };
+    var matrix = new ConnectionsObj();
+    matrix.init();
+    matrix.draw();
+    /*
+    *  点线
+    */
+    var DrawLineObj = function () {
+      this.connectionsArr = [];
+      this.cirR = 5;
+      this.lineW = 2;
+    };
+    DrawLineObj.prototype.choosePoint = function (x, y) {
+      var xIndex = Math.round(x / (Connections.width / (Math.sqrt(matrix.num) - 1)));
+      var yIndex = Math.round(y / (Connections.width / (Math.sqrt(matrix.num) - 1)));
+      xIndex === 0 ? xIndex = 1 : xIndex = xIndex;
+      yIndex === 0 ? yIndex = 1 : yIndex = yIndex;
+      xIndex === matrix.x[1].length ? xIndex = matrix.x[1].length - 1 : xIndex = xIndex;
+      yIndex === matrix.y[1].length ? yIndex = matrix.y[1].length - 1 : yIndex = yIndex;
+      console.log(xIndex, yIndex)
+      console.log(matrix.x[xIndex][1], matrix.y[1][yIndex])
+      this.connectionsArr.push({ "x": matrix.x[xIndex][1], "y": matrix.y[1][yIndex] });
+      return this.connectionsArr;
+    };
+    DrawLineObj.prototype.init = function () {
+      this.connectionsArr = [];
+      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);  
+    };
+    DrawLineObj.prototype.drawCircle = function () {
+      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
+      ctxDrawline.fillStyle = "#555";
+      for (var i = 0; i < this.connectionsArr.length; i++) {
+        ctxDrawline.beginPath();
+        ctxDrawline.arc(this.connectionsArr[i].x, this.connectionsArr[i].y, this.cirR, 0, 2 * Math.PI);
+        ctxDrawline.fill();
+      }
+    };
+    DrawLineObj.prototype.drawline = function () {
+      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
+      ctxDrawline.strokeStyle = "#555";
+      this.drawCircle();
+      for (var i = 0; i < this.connectionsArr.length - 1; i++) {
+        ctxDrawline.beginPath();
+        ctxDrawline.moveTo(this.connectionsArr[i].x, this.connectionsArr[i].y);
+        ctxDrawline.lineTo(this.connectionsArr[i + 1].x, this.connectionsArr[i + 1].y);
+        ctxDrawline.stroke();
+      }
+    };
+    var points = new DrawLineObj();
+    /*
+    *  按钮
+    */
+    var AddSubBtnObj = function () {
+      this.index = Math.sqrt(matrix.num);
+    };
+    AddSubBtnObj.prototype.tap = function (ele) {
+      if (ele == 'add') {
+        this.index++;
+        if (this.index >= 20) {
+          this.index = 20;
+        }
+        sendOrderArr = [];
+      }
+      if (ele == 'sub') {
+        this.index--;
+        if (this.index <= 5) {
+          this.index = 5;
+        }
+        sendOrderArr = [];
+      };
+      if (ele == 'repeal') {
+        if (points.connectionsArr.length >= 1) {
+          points.connectionsArr.splice(points.connectionsArr.length - 1, 1);
+          points.drawline();
+          sendOrderArr = [];
+          return;
+        }
+      };
+      if (ele == 'start') {
+        toOrder(points.connectionsArr);
+        console.log(sendOrderArr)
+        return;
+      };
+      matrix.num = Math.pow(this.index, 2);
+      points.init();
+      matrix.init();
+      matrix.draw();
     }
-    var i = {
-        person: 'zk',
-        role: 'aaaaa'
+
+    var addSubBtn = new AddSubBtnObj();
+    /*
+    *  根据坐标生成转弯角度和前进距离  
+    */
+    // 前进距离
+    function toOrder(arr) {
+      sendOrderArr = [];
+      if (arr.length > 1) {
+        for (var i = 0; i < arr.length - 1; i++) {
+          var disX = Math.pow(arr[i].x - arr[i + 1].x, 2);
+          var disY = Math.pow(arr[i].y - arr[i + 1].y, 2);
+          var step = Math.round(Math.sqrt(disX + disY) / (Connections.width / (Math.sqrt(matrix.num) - 1)));
+          sendOrderArr.push("前进" + step + "步");
+          if (i < arr.length - 2) {
+            var toAngle = new toAngleObj(arr[i].x,arr[i].y,arr[i + 1].x,arr[i + 1].y,arr[i + 2].x,arr[i + 2].y);
+          }
+        }
+      }
+    };
+    var toAngleObj = function (x1,y1,x2,y2,x3,y3) {
+      this.Angle;
+      this.getRotateAngle = function () {
+        var va_x = x3 - x2;
+        var va_y = y3 - y2;
+        var vb_x = x1 - x2;
+        var vb_y = y1 - y2;
+        var productValue = (va_x * vb_x) + (va_y * vb_y);
+        var va_val = Math.sqrt(va_x * va_x + va_y * va_y);
+        var vb_val = Math.sqrt(vb_x * vb_x + vb_y * vb_y);
+        var cosValue = productValue / (va_val * vb_val);
+        if (cosValue < -1 && cosValue > -2) {
+          cosValue = -1;
+        } else if (cosValue > 1 && cosValue < 2) {
+          cosValue = 1;
+        }
+        return Math.round(Math.acos(cosValue) * 180 / Math.PI);
+      };
+      this.direction = function () {
+        var flag = (x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1);
+        if (flag > 0) {
+          this.Angle = "顺时针" + (180 - this.getRotateAngle());
+        } else if (flag == 0) {
+          this.Angle = "直行" + (180 - this.getRotateAngle());
+        } else {
+          this.Angle = "逆时针" + (180 - this.getRotateAngle());
+        }
+        sendOrderArr.push(this.Angle);
+      }
+      this.direction();
+    };
+
+
+    /*
+    *  点击事件
+    */
+    drawLine.onclick = function (e) {
+      var event = e || window.event;
+      var tapX = event.clientX, tapY = event.clientY;
+      points.choosePoint(tapX, tapY);
+      points.drawline();
+    };
+
+    for (var i = 0; i < btngroup.length; i++) {
+      btngroup[i].addEventListener('click', function(e) {
+        addSubBtn.tap(this.getAttribute('data-attr'));  
+      },false);
     }
-    great.call(i);
   </script>
 </body>
+
 </html>

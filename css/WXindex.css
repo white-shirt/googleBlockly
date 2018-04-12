@@ -36,12 +36,11 @@ li {
     height: 40px;
     border-radius: 50%;
     background: yellowgreen;
-    bottom: 110px;
+    bottom: 80px;
     left: 10px;
-    z-index: 100;
     opacity: 1;
     filter: Alpha(opacity(100));
-    z-index: 20004;
+    z-index: 20000;
 }
 
 .btn .btn_icon {
@@ -100,7 +99,7 @@ li {
     width: 40px;
     height: 40px;
     left: 10px;
-    bottom: 50px;
+    bottom: 20px;
     background: yellowgreen;
     border-radius: 50%;
     z-index: 20003;
@@ -335,12 +334,12 @@ input {
     position: absolute;
     bottom: -60%;
     width: 100%;
-    height: 60%;
-    box-sizing: border-box;
-    padding: 60px 10px 10px;
+    height: 75%;
+    padding: 60px 25px 10px;
     background: #fff;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    box-sizing: border-box;
     z-index: 20002;
 }
 
@@ -354,7 +353,7 @@ input {
     border-radius: 50px;
     background: url('../img/contentLogo.png') no-repeat;
     background-size: cover;
-    background-position: -208px 0;
+    background-position: 0 0;
     box-shadow: 0px 2px 10px #888;
 }
 
@@ -542,9 +541,52 @@ input {
 
 .animation {
     display: block;
+    position: relative;
     width: 100%;
-    height: 500px;
-    background: blue;
+    min-height: 400px;
+}
+
+#canvasBg {
+    position: absolute;
+    border-radius: 10px;
+}
+
+#Connections {
+    position: absolute;
+    border-radius: 10px;
+}
+
+#drawLine {
+    position: absolute;
+    border-radius: 10px;
+}
+
+.btngroup {
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: yellowgreen;
+}
+
+#btn {
+    position: absolute;
+    right: 0;
+}
+
+#repeal {
+    position: absolute;
+    right: 45px;
+}
+
+#add {
+    position: absolute;
+    right: 95px; 
+}
+
+#sub {
+    position: absolute;
+    right: 130px;
 }
 
 /*sidebar content end*/
