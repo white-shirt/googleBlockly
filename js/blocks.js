@@ -1,6 +1,6 @@
 Blockly.Blocks["blockly_pause"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("延迟").appendField(new Blockly.FieldNumber(0, 1, 10, 1), "pauseTime").appendField("秒");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("等待").appendField(new Blockly.FieldNumber(0, 1, 10, 1), "pauseTime").appendField("秒");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#008c97");
@@ -88,6 +88,38 @@ Blockly.Blocks["blockly_back"] = {
 		this.setHelpUrl("")
 	}
 };
+Blockly.Blocks['blockly_keepwalking_front'] = {
+  init: function() {
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("向前走")
+        .appendField(new Blockly.FieldNumber(50, 1, 200, 0.5), "time")
+        .appendField("秒 ")
+        .appendField(" 速度")
+        .appendField(new Blockly.FieldDropdown([["慢","50"], ["正常","80"], ["快","120"], ["超快","160"]]), "speed");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#f5821f");
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['blockly_keepwalking_back'] = {
+  init: function() {
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("向后走")
+        .appendField(new Blockly.FieldNumber(50, 1, 200, 0.5), "time")
+        .appendField("秒 ")
+        .appendField(" 速度")
+        .appendField(new Blockly.FieldDropdown([["慢","-50"], ["正常","-80"], ["快","-120"], ["超快","-160"]]), "speed");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#f5821f");
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 Blockly.Blocks["blockly_right"] = {
 	init: function () {
 		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("向右走").appendField(new Blockly.FieldNumber(0, 1, 10, 1), "RIGHT").appendField("步 ").appendField("速度").appendField(new Blockly.FieldDropdown([["慢", "50"], ["正常", "80"], ["快", "120"], ["超快", "160"]]), "SPEED");
@@ -100,7 +132,15 @@ Blockly.Blocks["blockly_right"] = {
 };
 Blockly.Blocks["blockly_rotate"] = {
 	init: function () {
-		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE).appendField("旋转").appendField(new Blockly.FieldNumber(5.5, 1, 30, 0), "ROTATESTEP").appendField("秒").appendField("").appendField("速度").appendField(new Blockly.FieldDropdown([["慢", "50"], ["正常", "80"], ["快", "120"], ["超快", "160"]]), "SPEED");
+		this.appendDummyInput().setAlign(Blockly.ALIGN_CENTRE)
+				.appendField("旋转")
+				.appendField(new Blockly.FieldNumber(5.5, 1, 30, 0), "ROTATESTEP")
+				.appendField("秒")
+				.appendField("旋转方向")
+				.appendField(new Blockly.FieldDropdown([["顺时针","1"], ["逆时针", "0"]]), "dir")
+				.appendField("")
+				.appendField("速度")
+				.appendField(new Blockly.FieldDropdown([["慢", "50"], ["正常", "80"], ["快", "120"], ["超快", "160"]]), "SPEED");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#f5821f");
@@ -180,18 +220,29 @@ Blockly.Blocks['blockly_customizecolor'] = {
 			.appendField(" 耳朵灯光  ")
 			.appendField("红")
 			.appendField(new Blockly.FieldNumber(0, 0, 255, 1), "RED")
-			.appendField("黄")
-			.appendField(new Blockly.FieldNumber(0, 0, 255, 1), "YELLLOW")
+			.appendField("绿")
+			.appendField(new Blockly.FieldNumber(0, 0, 255, 1), "green")
 			.appendField("蓝")
 			.appendField(new Blockly.FieldNumber(0, 0, 255, 1), "BLUE")
-			.appendField(new Blockly.FieldDropdown([["慢闪", "慢闪"], ["快闪", "快闪"], ["静止", "静止"]]), "Blink")
-			.appendField(new Blockly.FieldDropdown([["暗", "暗"], ["亮", "亮"], ["正常", "正常"]]), "Brightness");
+			.appendField(new Blockly.FieldDropdown([["慢闪", "5"], ["快闪", "20"], ["静止", "0"]]), "Blink")
+			.appendField(new Blockly.FieldDropdown([["暗", "50"], ["亮", "250"], ["正常", "150"]]), "Brightness");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour("#fec002");
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
+};
+Blockly.Blocks['blockly_customeye'] = {
+  init: function() {
+    this.appendDummyInput()
+		.appendField("点亮\"蛋仔\"的眼睛");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+	this.setColour("#fec002");
+ 	this.setTooltip("");
+	this.setHelpUrl("");
+  }
 };
 Blockly.Blocks['blockly_closelight'] = {
 	init: function () {
@@ -213,10 +264,7 @@ Blockly.Blocks['blockly_eyeswitch'] = {
 		  .appendField(" 左眼0x")
 		  .appendField(new Blockly.FieldTextInput(""), "left")
 		  .appendField(" 右眼0x")
-		  .appendField(new Blockly.FieldTextInput(""), "right")
-		  .appendField("时间")
-		  .appendField(new Blockly.FieldNumber(10, 1, 500, 1), "time")
-		  .appendField("秒");
+		  .appendField(new Blockly.FieldTextInput(""), "right");
 	  this.setPreviousStatement(true, null);
 	  this.setNextStatement(true, null);
 	  this.setColour("#fec002");

@@ -9,6 +9,7 @@ body {
     height: 100%;
     font-family: "微软雅黑", Tahoma, Helvetica, Arial, sans-serif;
     overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 a {
@@ -17,6 +18,11 @@ a {
 
 li {
     list-style: none;
+}
+
+button {
+    background: none;
+    border-style: none; 
 }
 
 #blocklyDiv {
@@ -35,7 +41,7 @@ li {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: yellowgreen;
+    background: #abd43d;
     bottom: 80px;
     left: 10px;
     opacity: 1;
@@ -68,27 +74,27 @@ li {
 }
 
 @keyframes bJ{
-    0% {bottom: 110px}
-    5% {bottom: 150px}
-    20% {bottom: 110px}
-    45% {bottom: 130px}
-    50% {bottom: 110px}
-    65% {bottom: 120px}
-    70% {bottom: 110px}
-    85% {bottom: 115px}
-    100% {bottom: 110px}
+    0% {bottom: 80px}
+    5% {bottom: 130px}
+    20% {bottom: 80px}
+    45% {bottom: 120px}
+    50% {bottom: 80px}
+    65% {bottom: 110px}
+    70% {bottom: 80px}
+    85% {bottom: 100px}
+    100% {bottom: 80px}
 }
 
 @-webkit-keyframes bJ{
-    0% {bottom: 110px}
-    5% {bottom: 150px}
-    20% {bottom: 110px}
-    45% {bottom: 130px}
-    50% {bottom: 110px}
-    65% {bottom: 120px}
-    70% {bottom: 110px}
-    85% {bottom: 115px}
-    100% {bottom: 110px}
+    0% {bottom: 80px}
+    5% {bottom: 130px}
+    20% {bottom: 80px}
+    45% {bottom: 120px}
+    50% {bottom: 80px}
+    65% {bottom: 110px}
+    70% {bottom: 80px}
+    85% {bottom: 100px}
+    100% {bottom: 80px}
 }
 
 /*start Btn end*/
@@ -100,7 +106,7 @@ li {
     height: 40px;
     left: 10px;
     bottom: 20px;
-    background: yellowgreen;
+    background: #abd43d;
     border-radius: 50%;
     z-index: 20003;
 }
@@ -354,6 +360,7 @@ input {
     background: url('../img/contentLogo.png') no-repeat;
     background-size: cover;
     background-position: 0 0;
+    box-sizing: border-box;
     box-shadow: 0px 2px 10px #888;
 }
 
@@ -380,7 +387,7 @@ input {
     height: auto;
     white-space: pre-wrap;
     font-size: 13px;
-    padding: 15px 40px;
+    padding: 15px 10px;
     box-sizing: border-box;
 }
 
@@ -391,7 +398,7 @@ input {
 }
 
 .card {
-    width: 75%;
+    width: 80%;
     height: auto;
     min-height: 120px;
     margin: 30px auto 40px;
@@ -536,7 +543,7 @@ input {
 .course {
     display: none;
     width: 100%;
-    height: 500px;
+    height: auto;
 }
 
 .animation {
@@ -561,15 +568,43 @@ input {
     border-radius: 10px;
 }
 
-.btngroup {
-    display: inline-block;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 3px;
-    background: yellowgreen;
+#sendAnimation {
+    position: absolute;
+    border-radius: 10px;
 }
 
-#btn {
+.wakeupBtn {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eee;
+}
+
+.BtnWrap {
+    display: none;
+    position: absolute;
+    right: -140px;
+}
+
+.Btnlist {
+    float: left;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 2px;  
+}
+
+.btngroup {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* #btn {
     position: absolute;
     right: 0;
 }
@@ -587,7 +622,7 @@ input {
 #sub {
     position: absolute;
     right: 130px;
-}
+} */
 
 /*sidebar content end*/
 

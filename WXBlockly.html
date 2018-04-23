@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title>Blockly编程</title>
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="blockly/WXblockly_compressed.js?version=20180326"></script>
+    <script src="blockly/WXblockly_compressed.js?version=20180417"></script>
     <script src="blockly/javascript_compressed.js"></script>
     <script src="blockly/zh-hans.js"></script>
-    <script src="js/blocks.js?version=20180326"></script>
-    <link rel="stylesheet" href="css/WXindex.css?version=20180326" />
+    <script src="js/blocks.js?version=20180417"></script>
+    <link rel="stylesheet" href="css/WXindex.css?version=201804171340 " />
 </head>
 <body>
     <div class="progressMask">
@@ -35,17 +35,23 @@
             <canvas id="canvasBg"></canvas>
             <canvas id="Connections"></canvas>
             <canvas id="drawLine"></canvas>
-            <span id="btn" class="btngroup" data-attr = "start">开始</span>
-            <span id="repeal" class="btngroup" data-attr = "repeal">撤销</span>
-            <span id="add" class="btngroup" data-attr = "add">加</span>
-            <span id="sub" class="btngroup" data-attr = "sub">减</span>
+            <canvas id="sendAnimation"></canvas>
+            <div class="BtnWrap">
+              <ul>
+                <li class="Btnlist"><button id="add" class="btngroup" data-attr = "add"></button></li>
+                <li class="Btnlist"><button id="sub" class="btngroup" data-attr = "sub"></button></li>
+                <li class="Btnlist"><button id="repeal" class="btngroup" data-attr = "repeal"></button></button></li>
+                <li class="Btnlist"><button id="btn" class="btngroup" data-attr = "start"></button></li>
+              </ul>
+            </div>
+            <div class="wakeupBtn"></div>
           </div>
           <div class="sidebarContent saveWorkspace">
             <div class="card saveCard">
               <input type="text" id="saveFile" name="saveFile" placeholder="请输入作品名称" />
               <span class="saveError"></span>
               <div class="bottomBtn">
-                <span class="saveShareBtn shareBtn">分享</span>  
+                <span class="saveShareBtn shareBtn">分享</span>
                 <span class="saveShareBtn saveBtn">保存</span>  
               </div> 
             </div>       
@@ -94,6 +100,8 @@
         <block type="blockly_back"></block>
         <block type="blockly_left"></block>
         <block type="blockly_right"></block>
+        <block type="blockly_keepwalking_front"></block>
+        <block type="blockly_keepwalking_back"></block>
         <block type="blockly_rotate"></block>
         <block type="blockly_turnleft"></block>
         <block type="blockly_turnright"></block>
@@ -103,9 +111,8 @@
       <category name="灯光" colour="#fec002">
         <block type="blockly_earcolor"></block>
         <block type="blockly_eyeswitch"></block>
-        <block type="blockly_eyelight" disabled="true"></block>
-        <block type="blockly_customizecolor" disabled="true"></block>
-        <block type="blockly_closelight" disabled="true"></block>
+        <block type="blockly_customizecolor"></block>
+        <block type="blockly_closelight"></block>
       </category>
       <category name="播放" colour="#d80381">
         <block type="blockly_animal"></block>
@@ -134,10 +141,11 @@
       </category>
     </xml>
   <script src="blockly/storage.js"></script>
-  <script src="js/Blocklyindex.js?version=20180326"></script>
-  <script src="js/javascript.js?version=20180326"></script>
-  <script src="js/path.js?version=201804121100"></script>
-  <script src="js/WXmain.js?version=20180326"></script>
-  <script src="js/course.js?version=20180403"></script>
+  <script src="js/Blocklyindex.js?version=20180417"></script>
+  <script src="js/javascript.js?version=20180417"></script>
+  <script src="js/path.js?version=201804231615"></script>
+  <script src="js/WXmain.js?version=201804231450"></script>
+  <script src="js/construction.js?version=20180417"></script>
+  <script src="js/course.js?version=20180417"></script>
 </body>
 </html>

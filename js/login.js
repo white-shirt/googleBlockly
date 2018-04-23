@@ -24,9 +24,7 @@ var userInfoWrap = document.querySelector(".userInfoWrap");
 var userDeviceId = function () {
   this.deviceId = '';
 };
-/* 
-*  switch to signIn/register/retrieve part
-*/
+/***************switch to signIn/register/retrieve part***********************/
 function Show(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -68,12 +66,9 @@ function Show(e) {
   }
   console.log("跳转到" + "-----" + this.getAttribute('router'));
 };
-/*
-* switch to signIn/register/retrieve part end
-*/
-/*
- * initmathAnswer
- */
+/**********************switch to signIn/register/retrieve part end*****************/
+
+/************************initmathAnswer*********************************/
 var num1, num2, num3;
 function initmathAnswer() {
 	var mathProblem = document.querySelector('#mathProblem');
@@ -84,12 +79,9 @@ function initmathAnswer() {
 	findmathProblem.innerHTML = num1 + "+" + num2 + "+" + num3 + "=" + "?";
 }
 initmathAnswer();      
-/*
- * initmathAnswer end
- */
-/*
- * switch Btn addEventListener
- */
+/****************************initmathAnswer end******************************/
+
+/***************************switch Btn addEventListener*************************/
 signInQRcodeBtn.addEventListener('click', Show, false);
 signInregisterBtn.addEventListener('click', Show, false);
 registerbotBackSignInBtn.addEventListener('click', Show, false);
@@ -97,12 +89,9 @@ forgotPasswordBtn.addEventListener('click', Show, false);
 retrievebotBackSignInBtn.addEventListener('click', Show, false);
 QRsignInBtn.addEventListener('click', Show, false);
 QRregisterBtn.addEventListener('click', Show, false);
-/*
- * switch Btn addEventListener end
- */
-/*
- * client-side check phone number
- */
+/**********************switch Btn addEventListener end*************************/
+
+/**********************check phone number*************************************/
 var curphoneNum;
 var onblurEle;
 var errorInfo;
@@ -136,12 +125,9 @@ function Checkphone() {
     }
   }
 };
-/*
-*  client-side check phone number end
-*/
-/*
- * client-side confirmPassword
- */
+/************************check phone number end*******************************/
+
+/************************confirmPassword**************************************/
 var valueOne;
 function confirmPd() {
 	var registerPassword = document.querySelector('#registerPassword');
@@ -171,12 +157,9 @@ function confirmPd() {
 		}
 	}
 }
-/*
- * client-side confirmPassword end
- */
-/*
- * check MACaddress
- */
+/****************************confirmPassword end*****************************/
+
+/****************************check MACaddress********************************/
 var macValue;
 function checkMac() {
 	var macAddress = document.querySelector('#macAddress');
@@ -199,12 +182,9 @@ function checkMac() {
 		macAddressError.style.display = "inline-block";
 	}
 }
-/*
- * check MACaddress end
- */
-/*
- * check mathProblem
- */
+/*****************************check MACaddress end**********************************/
+
+/****************************check mathProblem**************************************/
 var mathAnswerValue;
 var findmathAnswervalue;
 function checkmathProblem() {
@@ -234,12 +214,9 @@ function checkmathProblem() {
 }
 mathProblem.addEventListener('click', initmathAnswer, false);
 findmathProblem.addEventListener('click', initmathAnswer, false);
-/*
- * check mathProblem end
- */
-/*
- * check identifycode
- */
+/*****************************check mathProblem end******************************/
+
+/*****************************check identifycode*********************************/
 var receiveIdentifyCode = document.querySelector('#receiveIdentifyCode');
 var retrieveIdentifyBtn = document.querySelector('#retrieveIdentifyBtn');
 var gettedidentify = "我爱你";
@@ -340,13 +317,9 @@ function Countdown(ele) {
 }
 receiveIdentifyCode.addEventListener('click', getidentify, false);
 retrieveIdentifyBtn.addEventListener('click', getidentify, false);
-/*
- * check identifycode end
- */
+/**************************check identifycode end*****************************/
 
-/*
- * signInpart click signInBtn toSignIn
- */
+/**************************signInpart click signInBtn toSignIn**********************/
 function getUserInfo(result) {
   var gettedData = JSON.parse(result.success);
   var useravatar = document.querySelector(".useravatar");
@@ -420,13 +393,9 @@ function toSignIn() {
 	}
 };
 signInBtn.addEventListener('click', toSignIn, false);
+/*************************signInpart click signInBtn toSignIn end*******************************/
 
-/*
- * signInpart click signInBtn toSignIn end
- */
-/*
- * registerpart click registerBtn
- */
+/*************************registerpart click registerBtn************************************/
 function registerSuccess(result) {
 	if (result.success) {
 		registerBtn.innerHTML = "注册成功(2s后跳转到登录)";
@@ -480,12 +449,9 @@ function toregister() {
 	}
 };
 registerBtn.addEventListener('click', toregister, false);
-/*
- * registerpart click registerBtn end
- */
-/*
- * retrievepart click confirmModifyBtn
- */
+/****************************registerpart click registerBtn end********************************/
+
+/****************************retrievepart click confirmModifyBtn*******************************/
 var confirmModifyBtn = document.querySelector('#confirmModifyBtn');
 var newPasswordError = document.querySelector('.newPasswordError');
 function checkPwd() {
@@ -537,15 +503,9 @@ function tofindPassword() {
 	}
 }
 confirmModifyBtn.addEventListener('click', tofindPassword, false);
-/*
- * retrievepart click confirmModifyBtn end
- */
+/**************************retrievepart click confirmModifyBtn end*********************************/
 
-/*
- * 
- * modify userInfo
- * 
- */
+/***************************modify userInfo*******************************************/
 var midifyUserInfo = document.querySelector(".midifyUserInfo");
 var mask = document.querySelector(".mask");
 var UsInfoBox = document.querySelector(".UsInfoBox");
@@ -660,15 +620,10 @@ function getNewInfo() {
   modifyInfo.Age = newUsAgeVal;
   modifyInfo.Sex = newUsSexVal;
   console.log(modifyInfo);
-}
-/*
- * 
- * modify userInfo end
- * 
- */
-/*
-* auto login
-*/
+};
+/************************************modify userInfo end***************************************/
+
+/***********************************auto login*****************************************/
 function checkStorage(Username, Userpwd) {
   if (window.localStorage) {
     var userInfoObj = {
@@ -681,14 +636,11 @@ function checkStorage(Username, Userpwd) {
 window.onload = function () {
   toSignIn();
 }
-/*
-* auto login end
-*/
-/*
-* choose equipment
-*/
+/********************************auto login end*************************************/
 
 
-/*
-* choose equipment end
-*/
+
+/*******************************choose equipment************************************/
+
+
+/*****************************choose equipment end*********************************/

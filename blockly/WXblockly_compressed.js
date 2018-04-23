@@ -16464,7 +16464,11 @@ Blockly.BlockSvg.prototype.createTabList_ = function() {
 };
 Blockly.BlockSvg.prototype.onMouseDown_ = function(a) {
     var b = this.workspace.getGesture(a);
-    b && b.handleBlockStart(a, this)
+    b && b.handleBlockStart(a, this);
+    // if (this.type === 'blockly_customeye') {
+    //     console.log('我被点击了')
+    // }
+    return this.type
 };
 Blockly.BlockSvg.prototype.showHelp_ = function() {
     var a = goog.isFunction(this.helpUrl) ? this.helpUrl() : this.helpUrl;

@@ -8,285 +8,445 @@
   <title>Document</title>
 
   <style>
-    * {
-      padding: 0;
-      margin: 0;
-    }
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
 
-    #canvasBg {
-      position: absolute;
-    }
+.container, canvas {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
 
-    #Connections {
-      position: absolute;
-    }
+.canvas {
+  background: #ccc;
+  border-radius: 4px;
+  display: block;
+}
 
-    #drawLine {
-      position: absolute;
-    }
-
-    #btn {
-      position: absolute;
-      top: 500px;
-      left: 450px;
-    }
-
-    #repeal {
-      position: absolute;
-      top: 500px;
-      left: 380px;
-    }
-
-    #add {
-      position: absolute;
-      top: 500px;
-      left: 320px; 
-    }
-
-    #sub {
-      position: absolute;
-      top: 500px;
-      left: 260px; 
-    }
   </style>
 </head>
 
 <body>
-  <canvas id="canvasBg"></canvas>
-  <canvas id="Connections"></canvas>
-  <canvas id="drawLine"></canvas>
-  <button id="btn" class="btngroup" data-attr = "start">开始</button>
-  <button id="repeal" class="btngroup" data-attr = "repeal">上一步</button>
-  <button id="add" class="btngroup" data-attr = "add">加</button>
-  <button id="sub" class="btngroup" data-attr = "sub">减</button>
-  <script>
-    /*
-    *  初始化画布
-    */
+  <div class="container">
+    <canvas class="canvas" id="canvas"></canvas>
+  </div>
+<script>
+'use strict';
+(function() {
+  var canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    mouseX = 0, mouseY = -100,
+    width = window.innerWidth, height = window.innerHeight,
+    isMouseMove = false;
 
-    var canvasBg = document.querySelector('#canvasBg');
-    var Connections = document.querySelector('#Connections');
-    var drawLine = document.querySelector('#drawLine');
-    var btngroup = document.querySelectorAll('.btngroup');
-    var ctxBg = canvasBg.getContext('2d');
-    var ctxConnections = Connections.getContext('2d');
-    var ctxDrawline = drawLine.getContext('2d');
-    (function initBg() {
-      canvasBg.width = 500;
-      canvasBg.height = 500;
-      canvasBg.style.background = '#eee';
-    })();
-    (function initConnections() {
-      Connections.width = 500;
-      Connections.height = 500;
-      Connections.style.background = "rgba(255,255,255,0)";
-    })();
-    (function initDrawLine() {
-      drawLine.width = 500;
-      drawLine.height = 500;
-      drawLine.style.background = "rgba(255,255,255,0)";
-      var width = drawLine.width, height = drawLine.height;
-      if (window.devicePixelRatio) {
-        drawLine.style.width = width + "px";
-        drawLine.style.height = height + "px";
-        drawLine.height = height * window.devicePixelRatio;
-        drawLine.width = width * window.devicePixelRatio;
-        ctxDrawline.scale(window.devicePixelRatio, window.devicePixelRatio);
+  var TAU = 2 * Math.PI;
+  var generates = 0;
+  var attempts = 300;
+  var mainCirlce = {
+    x: width / 2,
+    y: height / 2,
+    rds: 220
+  };
+
+  var maxCirlcesCount = 700;
+  var circles = [];
+  var maxCircleSize = mainCirlce.rds / 7;
+  var colors = [
+    ['#0F4155', '#F5C03E'],
+    ['#D63826', '#0F4155'],
+    ['#0F4155', '#D63826'],
+    ['#152A3B', '#158ca7'],
+    ['#e4a50a', '#D63826'],
+    ['#D63826', '#e4a50a'],
+    ['#3a7b30', '#F5C03E'],
+    ['#0F4155', '#7ec873']
+  ];
+
+  var mouseCircle = {
+    currX: width / 2,
+    currY: -100,
+    targX: width / 2,
+    targY: -100,
+    rds: maxCircleSize * .85,
+    easingCircle: .15,
+    easingRect: .13,
+    angle: random(360),
+    rectCurrX: width / 2,
+    rectCurrY: -100,
+  };
+
+  var activeDistanceRadius = maxCircleSize * 2;
+  var isRectPosOfsset = false;
+  var isRectWidthOfsset = false;
+  var isDrawBubbles = true;
+  var isDrawRects = true;
+  var rndWidthFactor = 1;
+  var rndXOffsetFactor = .5;
+  var rndYOffsetFactor = .5;
+  var sintId;
+
+
+  function start() {
+    setup();
+  }
+
+  function setup() {
+    canvas.width  = width;
+    canvas.height = height;
+    ctx.lineWidth = 1;
+
+    sintId = setInterval(function () {
+      generateNewWorld();
+    }, 500);
+
+    setEventListeners();
+    draw();
+  }
+
+  function generateNewWorld() {
+    if (generates === 3) {  clearInterval(sintId);  }
+
+    isRectPosOfsset = false;
+    isRectWidthOfsset = false;
+    isDrawBubbles = true;
+    isDrawRects = true;
+    rndWidthFactor = 1;
+    rndXOffsetFactor = .5;
+    rndYOffsetFactor = .5;
+
+    mouseCircle.angle = random(360);
+
+    var clrSetIdx = ~~random(colors.length);
+    ctx.strokeStyle = colors[clrSetIdx][0];
+    ctx.fillStyle   = colors[clrSetIdx][1];
+
+    if (generates === 0) {
+      isDrawRects = false;
+    }
+
+    if (generates === 1) {
+      isRectPosOfsset = true;
+      rndXOffsetFactor = random(-.5, 1);
+      rndYOffsetFactor = random(-.5, 1);
+    }
+
+    if (generates === 2) {
+      isRectWidthOfsset = true;
+      rndWidthFactor = random(4, 5);
+    }
+
+    if (generates > 3) {
+      if (Math.random() >= .8) {
+        isRectWidthOfsset = true;
+        rndWidthFactor = random(3, 5);
       }
-    })();
-    /*
-    *  命令集合
-    */
-    var sendOrderArr = [];
-    /*
-    *   矩阵点
-    */
-    var ConnectionsObj = function () {
-      this.x = [];
-      this.y = [];
-      this.num = 225;
-      this.r = 3;
-      this.width = 1;
-      this.color = "yellowgreen";
-    };
-    ConnectionsObj.prototype.init = function () {
-      for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
-        this.x[i] = new Array();
-        this.y[i] = new Array();
-        for (var j = 1; j < Math.sqrt(this.num) - 1; j++) {
-          this.x[i][j] = Math.round(Connections.width / (Math.sqrt(this.num) - 1)) * i;
-          this.y[i][j] = Math.round(Connections.height / (Math.sqrt(this.num) - 1)) * j;
+      if (Math.random() >= .7) {
+        isRectPosOfsset = true;
+        rndXOffsetFactor = random(-.5, 1);
+        rndYOffsetFactor = random(-.5, 1);
+      }
+      if (Math.random() >= .85) {
+        isDrawBubbles = false;
+      }
+
+      if (isDrawBubbles) {
+        if (Math.random() >= .85) {
+          isDrawRects = false;
         }
       }
-    };
-    ConnectionsObj.prototype.draw = function () {
-      ctxConnections.clearRect(0, 0, Connections.width, Connections.height);
-      for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
-        for (var j = 1; j < Math.sqrt(this.num) - 1; j++) {
-          ctxConnections.strokeStyle = this.color;
-          ctxConnections.lineWidth = this.width;
-          ctxConnections.beginPath();
-          ctxConnections.arc(this.x[i][j], this.y[i][j], this.r, 0, 2 * Math.PI);
-          ctxConnections.stroke();
+    }
+
+    generateCirclesInCircle();
+    ++generates;
+  }
+
+  function draw() {
+    background('#fff');
+    drawFoamBubbles();
+    drawMouseCircle();
+    window.requestAnimationFrame(draw);
+  }
+
+
+  function drawFoamBubbles() {
+    updateCirclesPos(circles);
+
+    circles.forEach(function (p) {
+      p.updateAnimationValues();
+    });
+
+    if (isDrawRects) {
+      circles.forEach(function (p) {
+        p.drawRect();
+      });
+    }
+
+    if (isDrawBubbles) {
+      circles.forEach(function (p) {
+        p.drawCircle();
+      });
+    }
+  }
+
+  function drawMouseCircle() {
+    mouseCircle.currX += (mouseX - mouseCircle.currX) * mouseCircle.easingCircle;
+    mouseCircle.currY += (mouseY - mouseCircle.currY) * mouseCircle.easingCircle;
+
+    mouseCircle.rectCurrX += (mouseX - mouseCircle.rectCurrX) * mouseCircle.easingRect;
+    mouseCircle.rectCurrY += (mouseY - mouseCircle.rectCurrY) * mouseCircle.easingRect;
+
+    ctx.beginPath();
+    ctx.arc(mouseCircle.currX, mouseCircle.currY, mouseCircle.rds, 0, Math.PI * 2, false);
+    ctx.arc(mouseCircle.currX, mouseCircle.currY, mouseCircle.rds + .3, 0, Math.PI * 2, false);
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(mouseCircle.rectCurrX, mouseCircle.rectCurrY);
+    ctx.rotate(mouseCircle.angle);
+    ctx.fillRect(-mouseCircle.rds * rndXOffsetFactor, -mouseCircle.rds * rndYOffsetFactor, mouseCircle.rds / rndWidthFactor, mouseCircle.rds);
+    ctx.restore();
+  }
+
+  function generateCirclesInCircle() {
+    circles = [];
+    var newCircleCenter, tmpDistance, cDist, idx, itr, i;
+
+    for (idx = 0; idx < maxCirlcesCount; idx++) {
+      for (i = 0; i < attempts; ++i) {
+        newCircleCenter = genNewPosition(mainCirlce);
+        if (isPointInsideCircle(newCircleCenter, mainCirlce) && !isIntersectWithCircles(newCircleCenter, circles)) {
+          break;
         }
       }
+
+      // distance to main circle border;
+      var newCircleSize = (mainCirlce.rds - dist(newCircleCenter.x, newCircleCenter.y, mainCirlce.x, mainCirlce.y)) * 2;
+      newCircleSize = newCircleSize > maxCircleSize ? maxCircleSize : newCircleSize;
+
+      for (itr = 0; itr < circles.length; itr++) {
+        cDist = dist(circles[itr].x, circles[itr].y, newCircleCenter.x, newCircleCenter.y);
+        tmpDistance = Math.abs(circles[itr].rds - cDist);
+
+        if (tmpDistance < newCircleSize) {
+          newCircleSize = tmpDistance + 3;
+        }
+      }
+
+      if (newCircleSize >= 3) {
+        circles.push(new Circle(newCircleCenter.x, newCircleCenter.y, newCircleSize, idx));
+      }
+    }
+
+    if (isRectWidthOfsset) {
+      circles.forEach(function (circleItem) {
+        circleItem.rectWidthDivideFactor = rndWidthFactor;
+      });
+    }
+    if (isRectPosOfsset) {
+      circles.forEach(function (circleItem) {
+        circleItem.rectXOffsetFactor = rndXOffsetFactor;
+        circleItem.rectYOffsetFactor = rndYOffsetFactor;
+      });
+    }
+  }
+
+  function updateCirclesPos() {
+    var i, circleItem, theta, distance;
+
+    for (i = 0; i < circles.length; i++) {
+      circleItem = circles[i];
+
+      theta = Math.atan2(circleItem.y - mouseY, circleItem.x - mouseX);
+      distance = activeDistanceRadius / dist(mouseX, mouseY, circleItem.x, circleItem.y);
+
+      circleItem.x += Math.cos(theta) * distance + (circleItem.origX - circleItem.x) * 0.075;
+      circleItem.y += Math.sin(theta) * distance + (circleItem.origY - circleItem.y) * 0.075;
+    }
+  }
+
+
+  // Circle class
+  function Circle (x, y, r, idx) {
+    this.x = x;
+    this.y = y;
+    this.origX = x;
+    this.origY = y;
+    this.rds = r;
+    this.currRds = 0;
+    this.idx = idx;
+    this.durAnimation = random(1.7, 2.7);
+    this.durProgress = 0;
+    this.currAngle = random(1, 7);
+    this.targetAngle = this.currAngle + random(1, 7) * (Math.random() > .5 ? 1 : -1);
+
+    this.rectWidth = 0;
+    this.rectX = 0;
+    this.rectY = 0;
+    this.rectXOffsetFactor = .5;
+    this.rectYOffsetFactor = .5;
+    this.rectWidthDivideFactor = 1;
+
+    this.drawCircle = function () {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.currRds, 0, Math.PI * 2, false);
+      ctx.arc(this.x, this.y, this.currRds + .3, 0, Math.PI * 2, false);
+      ctx.stroke();
     };
-    var matrix = new ConnectionsObj();
-    matrix.init();
-    matrix.draw();
-    /*
-    *  点线
-    */
-    var DrawLineObj = function () {
-      this.connectionsArr = [];
-      this.cirR = 5;
-      this.lineW = 2;
+
+    this.drawRect = function () {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.currAngle);
+      ctx.fillRect(this.rectX, this.rectY, this.rectWidth, this.currRds);
+      ctx.restore();
     };
-    DrawLineObj.prototype.choosePoint = function (x, y) {
-      var xIndex = Math.round(x / (Connections.width / (Math.sqrt(matrix.num) - 1)));
-      var yIndex = Math.round(y / (Connections.width / (Math.sqrt(matrix.num) - 1)));
-      xIndex === 0 ? xIndex = 1 : xIndex = xIndex;
-      yIndex === 0 ? yIndex = 1 : yIndex = yIndex;
-      xIndex === matrix.x[1].length ? xIndex = matrix.x[1].length - 1 : xIndex = xIndex;
-      yIndex === matrix.y[1].length ? yIndex = matrix.y[1].length - 1 : yIndex = yIndex;
-      console.log(xIndex, yIndex)
-      console.log(matrix.x[xIndex][1], matrix.y[1][yIndex])
-      this.connectionsArr.push({ "x": matrix.x[xIndex][1], "y": matrix.y[1][yIndex] });
-      return this.connectionsArr;
-    };
-    DrawLineObj.prototype.init = function () {
-      this.connectionsArr = [];
-      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);  
-    };
-    DrawLineObj.prototype.drawCircle = function () {
-      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
-      ctxDrawline.fillStyle = "#555";
-      for (var i = 0; i < this.connectionsArr.length; i++) {
-        ctxDrawline.beginPath();
-        ctxDrawline.arc(this.connectionsArr[i].x, this.connectionsArr[i].y, this.cirR, 0, 2 * Math.PI);
-        ctxDrawline.fill();
+
+    this.updateAnimationValues = function () {
+      if (this.durProgress < this.durAnimation) {
+        if (this.currRds !== this.rds) {
+          this.currRds = easeOutElastic(this.durProgress, this.currRds, this.rds, this.durAnimation);
+          this.rectWidth = this.currRds / this.rectWidthDivideFactor;
+          this.rectX = -this.currRds * this.rectXOffsetFactor;
+          this.rectY = -this.currRds * this.rectYOffsetFactor;
+        }
+
+        if (this.currAngle !== this.targetAngle) {
+          this.currAngle = easeOutElastic(this.durProgress, this.currAngle, this.targetAngle, this.durAnimation);
+        }
+
+        this.durProgress += .008;
       }
     };
-    DrawLineObj.prototype.drawline = function () {
-      ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
-      ctxDrawline.strokeStyle = "#555";
+
+    this.drawWithAnimate = function () {
+      this.updateAnimationValues();
       this.drawCircle();
-      for (var i = 0; i < this.connectionsArr.length - 1; i++) {
-        ctxDrawline.beginPath();
-        ctxDrawline.moveTo(this.connectionsArr[i].x, this.connectionsArr[i].y);
-        ctxDrawline.lineTo(this.connectionsArr[i + 1].x, this.connectionsArr[i + 1].y);
-        ctxDrawline.stroke();
-      }
     };
-    var points = new DrawLineObj();
-    /*
-    *  按钮
-    */
-    var AddSubBtnObj = function () {
-      this.index = Math.sqrt(matrix.num);
+  }
+
+  function genNewPosition(mainCirlce) {
+    return {
+      x: random(10, width  - 20),
+      y: random(10, height - 10)
     };
-    AddSubBtnObj.prototype.tap = function (ele) {
-      if (ele == 'add') {
-        this.index++;
-        if (this.index >= 20) {
-          this.index = 20;
+
+    // // different way: perfect for creating point inside circle but having some slight differences in result
+    // var angle = random(TAU);
+    // var scalar = random(1, mainCirlce.rds);
+    // return {
+    //   x: Math.cos(angle) * scalar + mainCirlce.x,
+    //   y: Math.sin(angle) * scalar + mainCirlce.y
+    // };
+  }
+
+  function isPointInsideCircle(pos, circle) {
+    return  dist (pos.x, pos.y, circle.x, circle.y) < circle.rds;
+  }
+
+  function isIntersectWithCircles(pos, circles) {
+    if (circles.length > 0) {
+      for (var i = 0; i < circles.length; i++) {
+        if (isPointInsideCircle(pos, circles[i])) {
+          return true;
         }
-        sendOrderArr = [];
+        // return isPointInsideCircle(pos, circles[i]);
       }
-      if (ele == 'sub') {
-        this.index--;
-        if (this.index <= 5) {
-          this.index = 5;
-        }
-        sendOrderArr = [];
-      };
-      if (ele == 'repeal') {
-        if (points.connectionsArr.length >= 1) {
-          points.connectionsArr.splice(points.connectionsArr.length - 1, 1);
-          points.drawline();
-          sendOrderArr = [];
-          return;
-        }
-      };
-      if (ele == 'start') {
-        toOrder(points.connectionsArr);
-        console.log(sendOrderArr)
-        return;
-      };
-      matrix.num = Math.pow(this.index, 2);
-      points.init();
-      matrix.init();
-      matrix.draw();
     }
 
-    var addSubBtn = new AddSubBtnObj();
-    /*
-    *  根据坐标生成转弯角度和前进距离  
-    */
-    // 前进距离
-    function toOrder(arr) {
-      sendOrderArr = [];
-      if (arr.length > 1) {
-        for (var i = 0; i < arr.length - 1; i++) {
-          var disX = Math.pow(arr[i].x - arr[i + 1].x, 2);
-          var disY = Math.pow(arr[i].y - arr[i + 1].y, 2);
-          var step = Math.round(Math.sqrt(disX + disY) / (Connections.width / (Math.sqrt(matrix.num) - 1)));
-          sendOrderArr.push("前进" + step + "步");
-          if (i < arr.length - 2) {
-            var toAngle = new toAngleObj(arr[i].x,arr[i].y,arr[i + 1].x,arr[i + 1].y,arr[i + 2].x,arr[i + 2].y);
-          }
-        }
-      }
-    };
-    var toAngleObj = function (x1,y1,x2,y2,x3,y3) {
-      this.Angle;
-      this.getRotateAngle = function () {
-        var va_x = x3 - x2;
-        var va_y = y3 - y2;
-        var vb_x = x1 - x2;
-        var vb_y = y1 - y2;
-        var productValue = (va_x * vb_x) + (va_y * vb_y);
-        var va_val = Math.sqrt(va_x * va_x + va_y * va_y);
-        var vb_val = Math.sqrt(vb_x * vb_x + vb_y * vb_y);
-        var cosValue = productValue / (va_val * vb_val);
-        if (cosValue < -1 && cosValue > -2) {
-          cosValue = -1;
-        } else if (cosValue > 1 && cosValue < 2) {
-          cosValue = 1;
-        }
-        return Math.round(Math.acos(cosValue) * 180 / Math.PI);
-      };
-      this.direction = function () {
-        var flag = (x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1);
-        if (flag > 0) {
-          this.Angle = "顺时针" + (180 - this.getRotateAngle());
-        } else if (flag == 0) {
-          this.Angle = "直行" + (180 - this.getRotateAngle());
-        } else {
-          this.Angle = "逆时针" + (180 - this.getRotateAngle());
-        }
-        sendOrderArr.push(this.Angle);
-      }
-      this.direction();
-    };
+    return false;
+  }
 
 
-    /*
-    *  点击事件
-    */
-    drawLine.onclick = function (e) {
-      var event = e || window.event;
-      var tapX = event.clientX, tapY = event.clientY;
-      points.choosePoint(tapX, tapY);
-      points.drawline();
-    };
+  function setEventListeners() {
+    document.addEventListener('mousedown', mouseDown);
+    document.addEventListener('mouseout',  mouseOut );
+    document.addEventListener('mousemove', mouseMove);
+    document.addEventListener('keypress',  keyTyped );
+    window.addEventListener('resize',  function() {
+      width = window.innerWidth; height = window.innerHeight;
+    } );
+  }
 
-    for (var i = 0; i < btngroup.length; i++) {
-      btngroup[i].addEventListener('click', function(e) {
-        addSubBtn.tap(this.getAttribute('data-attr'));  
-      },false);
+  function keyTyped(evt) {
+    var eventKey = evt.key.toLowerCase();
+    switch (eventKey){
+      case 'g': generateNewWorld(); break;
     }
-  </script>
+  }
+
+  function mouseDown(evt) {
+    if (evt.button === 0) { generateNewWorld(); }
+  }
+
+  function mouseOut (evt) {
+    isMouseMove = false;
+  }
+
+  function mouseMove(evt) {
+    var mousePos = getMousePos(canvas, evt);
+    mouseX = mousePos.x;
+    mouseY = mousePos.y;
+    isMouseMove = true;
+  }
+
+  function getMousePos(block, evt) {
+    block = block || document.getElementsByTagName('body')[0];
+    var rect = block.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Helper Functions //////////////////////////////////////////////////////////////////////////////////////////
+
+  function random (min, max){
+    if (!min && min !== 0) {
+      return Math.random();
+    } else if (!max) {
+      return Math.random() * min;
+    }
+
+    return Math.random() * (max - min) + min;
+  }
+
+  function dist (x1, y1, x2, y2) {
+    var a = x1 - x2;
+    var b = y1 - y2;
+    return Math.sqrt(a * a + b * b);
+  }
+
+  function background(clr) {
+    ctx.save();
+    ctx.fillStyle = clr || "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  }
+
+  // t: curr time, b: start val, c: change In value, d: duration
+  function easeOutElastic(t, b, c, d) {
+    var s = 1.70158;
+    var a = c;
+    if (t === 0) { return 0; }
+    t /= d;
+    if (t === 1) { return c; }
+    var p = d * 0.3;
+    if (a < Math.abs(c)) {
+      a = c;
+      s = p / 4;
+    } else {
+      s = p / (2 * Math.PI) * Math.asin(c / a);
+    }
+    return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c;
+  }
+
+  start();
+})();
+</script>
 </body>
 
 </html>

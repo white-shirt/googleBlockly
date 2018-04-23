@@ -1,15 +1,17 @@
 /**
- * author         [zk]
- * describe       [draw track and send to robot]
- * time           [2018.04.12]
+ * @author         [zk]
+ * @description    [draw track and send to robot]
+ * @date           [2018.04.12]
  */
 var canvasBg = document.querySelector('#canvasBg');
 var Connections = document.querySelector('#Connections');
 var drawLine = document.querySelector('#drawLine');
+var sendAnimation = document.querySelector('#sendAnimation');
 var btngroup = document.querySelectorAll('.btngroup');
 var ctxBg = canvasBg.getContext('2d');
 var ctxConnections = Connections.getContext('2d');
 var ctxDrawline = drawLine.getContext('2d');
+var ctxsendAnimation = sendAnimation.getContext('2d');
 var canvasWidth = canvasBg.parentElement.offsetWidth;
 /**
  * init canvasBg canvasConnections canvasdrawLine
@@ -17,7 +19,7 @@ var canvasWidth = canvasBg.parentElement.offsetWidth;
 (function initBg() {
   canvasBg.width = canvasWidth;
   canvasBg.height = canvasWidth;
-  canvasBg.style.background = '#eee';
+  canvasBg.style.background = 'rgb(255, 255, 255)';
 })();
 (function initConnections() {
   Connections.width = canvasWidth;
@@ -45,10 +47,23 @@ var canvasWidth = canvasBg.parentElement.offsetWidth;
     ctxDrawline.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
 })();
-(function initBtngroup(){
-  for (var i = 0; i < document.querySelectorAll('.btngroup').length; i++) {
-    document.querySelectorAll('.btngroup')[i].style.top = canvasWidth + "px";
+(function initsendAnimation(){
+  sendAnimation.style.display = "none";
+  sendAnimation.width = canvasWidth;
+  sendAnimation.height = canvasWidth;
+  sendAnimation.style.background = "rgba(255,255,255,0)";
+  var width = sendAnimation.width, height = sendAnimation.height;
+  if (window.devicePixelRatio) {
+    sendAnimation.style.width = width + "px";
+    sendAnimation.style.height = height + "px";
+    sendAnimation.height = height * window.devicePixelRatio;
+    sendAnimation.width = width * window.devicePixelRatio;
+    ctxsendAnimation.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
+})();
+(function initBtngroup(){
+    document.querySelector('.BtnWrap').style.top = canvasWidth + "px";
+    document.querySelector('.wakeupBtn').style.top = canvasWidth + "px";
 })();
 /**
  * order Array
@@ -67,7 +82,7 @@ var ConnectionsObj = function () {
   this.num = 225;
   this.r = 3;
   this.width = 1;
-  this.color = "yellowgreen";
+  this.color = "#efe1f2";
 };
 ConnectionsObj.prototype.init = function () {
   for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
@@ -84,10 +99,11 @@ ConnectionsObj.prototype.draw = function () {
   for (var i = 1; i < Math.sqrt(this.num) - 1; i++) {
     for (var j = 1; j < Math.sqrt(this.num) - 1; j++) {
       ctxConnections.strokeStyle = this.color;
+      ctxConnections.fillStyle = this.color;
       ctxConnections.lineWidth = this.width;
       ctxConnections.beginPath();
       ctxConnections.arc(this.x[i][j], this.y[i][j], this.r, 0, 2 * Math.PI);
-      ctxConnections.stroke();
+      ctxConnections.fill();
     }
   }
 };
@@ -126,7 +142,6 @@ DrawLineObj.prototype.choosePoint = function (x, y) {
   return this.connectionsArr;
 };
 DrawLineObj.prototype.drawCircle = function () {
-  ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
   ctxDrawline.fillStyle = "#555";
   for (var i = 0; i < this.connectionsArr.length; i++) {
     ctxDrawline.beginPath();
@@ -141,14 +156,59 @@ DrawLineObj.prototype.drawline = function () {
   ctxDrawline.clearRect(0, 0, drawLine.width, drawLine.height);
   ctxDrawline.strokeStyle = "#555";
   this.drawCircle();
+  ctxDrawline.beginPath();
   for (var i = 0; i < this.connectionsArr.length - 1; i++) {
-    ctxDrawline.beginPath();
     ctxDrawline.moveTo(this.connectionsArr[i].x, this.connectionsArr[i].y);
     ctxDrawline.lineTo(this.connectionsArr[i + 1].x, this.connectionsArr[i + 1].y);
-    ctxDrawline.stroke();
   }
+  ctxDrawline.stroke();
 };
 var points = new DrawLineObj();
+
+/***************************Ball Animation**********************************/
+var raf;
+var ball = {
+  x: canvasWidth * Math.random() / 1.2,
+  y: canvasWidth * 0.1,
+  vx: 2,
+  vy: 1,
+  radius: 15,
+  color: 'yellowgreen',
+  draw: function() {
+    if (this.y > canvasWidth - this.radius) this.y = canvasWidth - this.radius;
+    ctxsendAnimation.beginPath();
+    ctxsendAnimation.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+    ctxsendAnimation.closePath();
+    ctxsendAnimation.fillStyle = this.color;
+    ctxsendAnimation.fill();
+  },
+  init: function () {
+    window.cancelAnimationFrame(raf);
+    sendAnimation.style.display = "none";
+    this.x = canvasWidth * Math.random() / 1.2;
+    this.y = canvasWidth * 0.1;
+    this.vx = 2;
+    this.vy = 1;
+  }
+};
+function drawBall() {
+  sendAnimation.style.display = "block";
+  ctxsendAnimation.clearRect(0, 0, canvasWidth, canvasWidth);
+  ball.draw();
+  ball.vy *= 0.991;
+  ball.vy += .4;
+  ball.x += ball.vx * 2;
+  ball.y += ball.vy;
+  if (ball.y + ball.vy > canvasWidth - ball.radius || ball.y + ball.vy < 0) {
+    ball.vy = -ball.vy;
+  }
+  if (ball.x + ball.vx > canvasWidth - ball.radius || ball.x + ball.vx < 0) {
+    ball.vx = -ball.vx;
+  }
+  raf = window.requestAnimationFrame(drawBall);
+};
+/****************************Ball Animation end*********************************/
+
 /**
  * @param {connectionsArr}  arr
  */
@@ -214,22 +274,22 @@ var toAngleObj = function (x1,y1,x2,y2,x3,y3) {
 var AddSubBtnObj = function () {
   this.index = Math.sqrt(matrix.num);
 };
-AddSubBtnObj.prototype.tap = function (ele) {
-  if (ele == 'add') {
+AddSubBtnObj.prototype.tap = function (attr) {
+  if (attr === 'add') {
     this.index++;
     if (this.index >= 20) {
       this.index = 20;
     }
     sendOrderArr = [];
   }
-  if (ele == 'sub') {
+  if (attr === 'sub') {
     this.index--;
     if (this.index <= 5) {
       this.index = 5;
     }
     sendOrderArr = [];
   };
-  if (ele == 'repeal') {
+  if (attr === 'repeal') {
     if (points.connectionsArr.length >= 1) {
       points.connectionsArr.splice(points.connectionsArr.length - 1, 1);
       points.drawline();
@@ -237,12 +297,14 @@ AddSubBtnObj.prototype.tap = function (ele) {
       return;
     }
   };
-  if (ele == 'start') {
+  if (attr === 'start') {
     sendOrderArr = [];
     toOrder(points.connectionsArr);
     console.log(sendOrderArr);
     // var Datas = document.getElementById("DeviceId").value;
     if (sendOrderArr.length > 0) {
+      raf = window.requestAnimationFrame(drawBall);
+      btnSwitch('off');
       for (var i = 0; i < sendOrderArr.length; i++) {
         sendOrderArr[i].data.unshift(i);
       }
@@ -268,19 +330,21 @@ drawLine.onclick = function (e) {
   points.choosePoint(tapX, tapY);
   points.drawline();
 }
-for (var i = 0; i < btngroup.length; i++) {
-  btngroup[i].addEventListener('click', function(e) {
-    addSubBtn.tap(this.getAttribute('data-attr'));  
-  },false);
-}
-if (sendOrderArr.length > 0) {
-  for (var i = 0; i < sendOrderArr.length; i++) {
-    sendOrderArr[i].data.unshift(i);
+function btnSwitch(state) {
+  for (var i = 0; i < btngroup.length; i++) {
+    if (state === "on") {
+      btngroup[i].disabled = "";
+      btngroup[i].style.background = "yellowgreen";
+      btngroup[i].onclick = function () {
+        addSubBtn.tap(this.getAttribute('data-attr')); 
+      }
+    } else {
+      btngroup[i].style.background = "#b1b1b1";
+      btngroup[i].disabled = "disabled";
+    }
   }
-  var firstOrder = { "cmd": 0, "data": [sendOrderArr.length] }
-  sendOrderArr.unshift(firstOrder);
-  
-}
+};
+btnSwitch('on');
 /**
  * @param {Array} arr 
  */
@@ -309,9 +373,26 @@ function sendDatas() {
     count++;
     if (count == sendOrderArr.length) {
       clearInterval(timer);
+      btnSwitch('on');
+      ball.init();
     }
   }
+};
+/********************************wakeupBtn**********************************/
+var wakeupBtn = document.querySelector('.wakeupBtn');
+wakeupBtn.addEventListener('touchstart', wakeup, false);
+
+function wakeup() {
+  var BtnWrap = document.querySelector('.BtnWrap');
+  if (BtnWrap.style.display === 'none') {
+    BtnWrap.style.display = 'inline-block';
+    BtnWrap.classList.add('slideleft');
+  } else if (BtnWrap.style.display === 'inline-block') {
+    BtnWrap.style.display = 'none';
+    BtnWrap.classList.add('slideright');
+  }
 }
+
 
 
 
