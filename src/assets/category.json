@@ -1,0 +1,130 @@
+{
+  "create": [
+    {
+      "id": "direction",
+      "disable": false,
+      "xml": "<xml id='toolbox' style='display: none'><block id='front' type='iconblockly_front'></block><block id='back' type='iconblockly_back'></block><block id='turnleft' type='iconblockly_turnleft'></block><block id='turnright' type='iconblockly_turnright'></block><block id='turnround' type='iconblockly_turnround'></block></xml>"
+    },
+    {
+      "id": "sound",
+      "disable": false,
+      "xml": "<xml id='toolbox' style='display: none'><block id='cat_sound' type='iconblockly_catsound'></block><block id='dog_sound' type='iconblockly_dogsound'></block><block id='duck_sound' type='iconblockly_ducksound'></block><block id='horse_sound' type='iconblockly_horsesound'></block><block id='pig_sound' type='iconblockly_pigsound'></block><block id='bird_sound' type='iconblockly_birdsound'></block><block id='lalala_sound' type='iconblockly_lalalasound'></block><block id='miss_sound' type='iconblockly_misssound'></block><block id='shakelip_sound' type='iconblockly_shakelipsound'></block><block id='sleep_sound' type='iconblockly_sleepsound'></block><block id='sneeze_sound' type='iconblockly_sneezesound'></block><block id='muscle_sound' type='iconblockly_musclesound'></block></xml>"
+    },
+    {
+      "id": "light",
+      "disable": false,
+      "xml": "<xml id='toolbox' style='display: none'><block id='lightred' type='iconblockly_lightred'></block><block id='lightorange' type='iconblockly_lightorange'></block><block id='lightyellow' type='iconblockly_lightyellow'></block><block id='lightgreen' type='iconblockly_lightgreen'></block><block id='lightcyan' type='iconblockly_lightcyan'></block><block id='lightblue' type='iconblockly_lightblue'></block><block id='lightpurple' type='iconblockly_lightpurple'></block></xml>"
+    },
+    {
+      "id": "mode",
+      "disable": false,
+      "xml": "<xml id='toolbox' style='display: none'><block id='linefront' type='iconblockly_linefront'></block><block id='lineLeft' type='iconblockly_lineLeft'></block><block id='lineRight' type='iconblockly_lineRight'></block><block id='lineround' type='iconblockly_lineround'></block></xml>"
+    },
+    {
+      "id": "logic",
+      "disable": false,
+      "xml": "<xml id='toolbox' style='display: none'><block id='sportrandom' type='iconblockly_sportrandom'></block><block id='sound_random' type='iconblockly_soundrandom'></block><block id='light_random' type='iconblockly_lightrandom'></block><block id='logic_loop' type='iconblockly_loop'></block><block id='barrier' type='iconblockly_barrier'></block></xml>"
+    }
+  ],
+  "level": {
+    "level_1": {
+      "level": "level_1",
+      "name": "Forward",
+      "language_flag": "level_Forward",
+      "preview_smpic": "./static/img/preview/level_1_smpic.png",
+      "categoryDisable": { "direction": false, "sound": true, "light": true, "mode": true, "logic": true },
+      "xml": { "direction": "<xml id='toolbox' style='display: none'><block id='front' type='iconblockly_front' disabled='false'></block><block id='back' type='iconblockly_back' disabled='true'></block><block id='turnleft' type='iconblockly_turnleft' disabled='true'></block><block id='turnright' type='iconblockly_turnright' disabled='true'></block><block id='turnround' type='iconblockly_turnround' disabled='true'></block></xml>" },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_front"], "orderLength": 1 },
+      "activeCategory": "direction"
+    },
+    "level_2": {
+      "level": "level_2",
+      "name": "Backward",
+      "language_flag": "level_Backward",
+      "preview_smpic": "./static/img/preview/level_2_smpic.png",
+      "categoryDisable": { "direction": false, "sound": true, "light": true, "mode": true, "logic": true },
+      "xml": { "direction": "<xml id='toolbox' style='display: none'><block id='front' type='iconblockly_front' disabled='true'></block><block id='back' type='iconblockly_back' disabled='false'></block><block id='turnleft' type='iconblockly_turnleft' disabled='true'></block><block id='turnright' type='iconblockly_turnright' disabled='true'></block><block id='turnround' type='iconblockly_turnround' disabled='true'></block></xml>" },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_back"], "orderLength": 2 },
+      "activeCategory": "direction"
+    },
+    "level_3": {
+      "level": "level_3",
+      "name": "Light",
+      "language_flag": "level_Light",
+      "preview_smpic": "./static/img/preview/level_3_smpic.png",
+      "categoryDisable": { "direction": true, "sound": true, "light": false, "mode": true, "logic": true },
+      "xml": { "light": "<xml id='toolbox' style='display: none'><block id='lightred' type='iconblockly_lightred' disabled='false'></block><block id='lightorange' type='iconblockly_lightorange' disabled='true'></block><block id='lightyellow' type='iconblockly_lightyellow' disabled='false'></block><block id='lightgreen' type='iconblockly_lightgreen' disabled='false'></block><block id='lightcyan' type='iconblockly_lightcyan' disabled='true'></block><block id='lightblue' type='iconblockly_lightblue' disabled='true'></block><block id='lightpurple' type='iconblockly_lightpurple' disabled='true'></block></xml>" },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_lightred", "iconblockly_lightyellow", "iconblockly_lightgreen"], "orderLength": 3 },
+      "activeCategory": "light"
+    },
+    "level_4": {
+      "level": "level_4",
+      "name": "Puzzle Coding",
+      "language_flag": "level_Puzzle_Coding",
+      "preview_smpic": "./static/img/preview/level_4_smpic.png",
+      "categoryDisable": { "direction": true, "sound": true, "light": true, "mode": false, "logic": true },
+      "xml": { "mode": "<xml id='toolbox' style='display: none'><block id='linefront' type='iconblockly_linefront' disabled='false'></block><block id='lineLeft' type='iconblockly_lineLeft' disabled='true'></block><block id='lineRight' type='iconblockly_lineRight' disabled='false'></block><block id='lineround' type='iconblockly_lineround' disabled='true'></block></xml>" },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_linefront", "iconblockly_lineRight", "iconblockly_linefront"], "orderLength": 3 },
+      "activeCategory": "mode"
+    },
+    "level_5": {
+      "level": "level_5",
+      "name": "Repeat",
+      "language_flag": "level_Repeat",
+      "preview_smpic": "./static/img/preview/level_5_smpic.png",
+      "categoryDisable": { "direction": false, "sound": false, "light": true, "mode": true, "logic": false },
+      "xml": {
+        "direction": "<xml id='toolbox' style='display: none'><block id='front' type='iconblockly_front' disabled='true'></block><block id='back' type='iconblockly_back' disabled='true'></block><block id='turnleft' type='iconblockly_turnleft' disabled='true'></block><block id='turnright' type='iconblockly_turnright' disabled='true'></block><block id='turnround' type='iconblockly_turnround' disabled='false'></block></xml>",
+        "sound": "<xml id='toolbox' style='display: none'><block id='cat_sound' type='iconblockly_catsound' disabled='false'></block><block id='dog_sound' type='iconblockly_dogsound' disabled='true'></block><block id='duck_sound' type='iconblockly_ducksound' disabled='true'></block><block id='horse_sound' type='iconblockly_horsesound' disabled='true'></block><block id='pig_sound' type='iconblockly_pigsound' disabled='true'></block><block id='bird_sound' type='iconblockly_birdsound' disabled='true'></block><block id='lalala_sound' type='iconblockly_lalalasound' disabled='true'></block><block id='miss_sound' type='iconblockly_misssound' disabled='true'></block><block id='shakelip_sound' type='iconblockly_shakelipsound' disabled='true'></block><block id='sleep_sound' type='iconblockly_sleepsound' disabled='true'></block><block id='sneeze_sound' type='iconblockly_sneezesound' disabled='true'></block><block id='muscle_sound' type='iconblockly_musclesound' disabled='true'></block></xml>",
+        "logic": "<xml id='toolbox' style='display: none'><block id='sportrandom' type='iconblockly_sportrandom' disabled='true'></block><block id='sound_random' type='iconblockly_soundrandom' disabled='true'></block><block id='light_random' type='iconblockly_lightrandom' disabled='true'></block><block id='logic_loop' type='iconblockly_loop' disabled='false'></block><block id='barrier' type='iconblockly_barrier' disabled='true'></block></xml>"
+      },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_loop", "iconblockly_catsound", "iconblockly_turnround"], "orderLength": 4 },
+      "activeCategory": "logic"
+    },
+    "level_6": {
+      "level": "level_6",
+      "name": "Sensor",
+      "language_flag": "level_Sensor",
+      "preview_smpic": "./static/img/preview/level_6_smpic.png",
+      "categoryDisable": { "direction": true, "sound": false, "light": true, "mode": true, "logic": false },
+      "xml": {
+        "sound": "<xml id='toolbox' style='display: none'><block id='cat_sound' type='iconblockly_catsound' disabled='true'></block><block id='dog_sound' type='iconblockly_dogsound' disabled='false'></block><block id='duck_sound' type='iconblockly_ducksound' disabled='true'></block><block id='horse_sound' type='iconblockly_horsesound' disabled='true'></block><block id='pig_sound' type='iconblockly_pigsound' disabled='true'></block><block id='bird_sound' type='iconblockly_birdsound' disabled='true'></block><block id='lalala_sound' type='iconblockly_lalalasound' disabled='true'></block><block id='miss_sound' type='iconblockly_misssound' disabled='true'></block><block id='shakelip_sound' type='iconblockly_shakelipsound' disabled='true'></block><block id='sleep_sound' type='iconblockly_sleepsound' disabled='true'></block><block id='sneeze_sound' type='iconblockly_sneezesound' disabled='true'></block><block id='muscle_sound' type='iconblockly_musclesound' disabled='true'></block></xml>",
+        "logic": "<xml id='toolbox' style='display: none'><block id='sportrandom' type='iconblockly_sportrandom' disabled='true'></block><block id='sound_random' type='iconblockly_soundrandom' disabled='true'></block><block id='light_random' type='iconblockly_lightrandom' disabled='true'></block><block id='logic_loop' type='iconblockly_loop' disabled='true'></block><block id='barrier' type='iconblockly_barrier' disabled='false'></block></xml>"
+      },
+      "verify": { "blocks": ["iconblockly_hat", "iconblockly_barrier", "iconblockly_dogsound"], "orderLength": 3 },
+      "activeCategory": "logic"
+    }
+  },
+  "category": [
+    {
+      "name": "方向",
+      "id": "direction",
+      "url": "direction",
+      "color": "#0f61ad"
+    },
+    {
+      "name": "声音",
+      "id": "sound",
+      "url": "sound",
+      "color": "#59b43c"
+    },
+    {
+      "name": "灯光",
+      "id": "light",
+      "url": "light",
+      "color": "#ffcb30"
+    },
+    {
+      "name": "模式",
+      "id": "mode",
+      "url": "mode",
+      "color": "#003040"
+    },
+    {
+      "name": "逻辑",
+      "id": "logic",
+      "url": "logic",
+      "color": "#db3d9c"
+    }
+  ]
+}

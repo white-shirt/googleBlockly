@@ -1,0 +1,23 @@
+{
+    "cateIcon": {
+        "direction": "./static/img/categoryIcon/direction.png",
+        "sound": "./static/img/categoryIcon/sound.png",
+        "light": "./static/img/categoryIcon/light.png",
+        "mode": "./static/img/categoryIcon/mode.png",
+        "logic": "./static/img/categoryIcon/logic.png"
+    },
+    "zoomIcon": {
+        "zoomcenter": "./static/img/zoomIcon/zoomcenter.png",
+        "zoomsub": "./static/img/zoomIcon/zoomsub.png",
+        "zoomplus": "./static/img/zoomIcon/zoomplus.png"
+    },
+    "bleIcon": {
+        "connected": "./static/img/system/connect.png",
+        "disconnect": "./static/img/system/disconnect.png"
+    },
+    "speedIcon": {
+        "slow": "./static/img/vm/slow.png",
+        "fast": "./static/img/vm/fast.png",
+        "changeBtn": "./static/img/vm/changeBtn.png"
+    }
+}

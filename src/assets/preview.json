@@ -1,0 +1,20 @@
+{
+  "level_1": {
+    "preview_lgpic": "./static/img/preview/level_1.png"
+  },
+  "level_2": {
+    "preview_lgpic": "./static/img/preview/level_2.png"
+  },
+  "level_3": {
+    "preview_lgpic": "./static/img/preview/level_3.png"
+  },
+  "level_4": {
+    "preview_lgpic": "./static/img/preview/level_4.png"
+  },
+  "level_5": {
+    "preview_lgpic": "./static/img/preview/level_5.png"
+  },
+  "level_6": {
+    "preview_lgpic": "./static/img/preview/level_6.png"
+  }
+}

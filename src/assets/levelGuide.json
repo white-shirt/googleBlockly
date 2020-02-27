@@ -1,0 +1,44 @@
+{
+  "level_1": {
+    "level": "level_1",
+    "GuideAnimation": ["./static/img/level/level_1_1.gif", "./static/img/level/level_1_2.gif"],
+    "block_English": "./static/img/level/level_1_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_1_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_1_blockGuide_CN.png"
+  },
+  "level_2": {
+    "level": "level_2",
+    "GuideAnimation": ["./static/img/level/level_2_1.gif", "./static/img/level/level_2_2.gif", "./static/img/level/level_2_3.gif"],
+    "block_English": "./static/img/level/level_2_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_2_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_2_blockGuide_CN.png"
+  },
+  "level_3": {
+    "level": "level_3",
+    "GuideAnimation": ["./static/img/level/level_3_1.gif", "./static/img/level/level_3_2.gif"],
+    "block_English": "./static/img/level/level_3_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_3_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_3_blockGuide_CN.png"
+  },
+  "level_4": {
+    "level": "level_4",
+    "GuideAnimation": ["./static/img/level/level_4_1.gif", "./static/img/level/level_4_2.gif", "./static/img/level/level_4_3.gif"],
+    "block_English": "./static/img/level/level_4_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_4_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_4_blockGuide_CN.png"
+  },
+  "level_5": {
+    "level": "level_5",
+    "GuideAnimation": ["./static/img/level/level_5_1.gif", "./static/img/level/level_5_2.gif", "./static/img/level/level_5_3.gif"],
+    "block_English": "./static/img/level/level_5_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_5_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_5_blockGuide_CN.png"
+  },
+  "level_6": {
+    "level": "level_6",
+    "GuideAnimation": ["./static/img/level/level_6_1.gif", "./static/img/level/level_6_2.gif"],
+    "block_English": "./static/img/level/level_6_blockGuide_English.png",
+    "block_Russian": "./static/img/level/level_6_blockGuide_Russian.png",
+    "block_CN": "./static/img/level/level_6_blockGuide_CN.png"
+  }
+}

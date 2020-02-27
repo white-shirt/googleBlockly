@@ -1,0 +1,24 @@
+{
+  "Introduction": [
+    "./static/img/help/Introduction/1.png", 
+    "./static/img/help/Introduction/2.png", 
+    "./static/img/help/Introduction/3.png",
+    "./static/img/help/Introduction/4.png",
+    "./static/img/help/Introduction/5.png",
+    "./static/img/help/Introduction/6.png"
+  ],
+  "Block": [
+    "./static/img/help/block/1.png",
+    "./static/img/help/block/2.png",
+    "./static/img/help/block/3.png",
+    "./static/img/help/block/4.png",
+    "./static/img/help/block/5.png",
+    "./static/img/help/block/6.png",
+    "./static/img/help/block/7.png"
+  ],
+  "About": [
+    "./static/img/help/about/1.png",
+    "./static/img/help/about/2.png",
+    "./static/img/help/about/3.png"
+  ]
+}

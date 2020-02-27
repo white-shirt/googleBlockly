@@ -1,0 +1,522 @@
+{
+  "map_graphs": {
+    "src": "./static/img/vm/vm_bg_1.png",
+    "map_id": "map_graphs",
+    "name": "认识图形",
+    "info": "我是谁？我在哪？快找到我带我回家吧!",
+    "ratio": 1,
+    "startPoint": "rect",
+    "pointData": {
+      "0": {
+        "name": "0",
+        "x": 0.1020,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "warn",
+        "E": "1",
+        "S": "5",
+        "index": 0
+      },
+      "1": {
+        "name": "1",
+        "x": 0.3010,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "0",
+        "E": "2",
+        "S": "square",
+        "index": 1
+      },
+      "2": {
+        "name": "2",
+        "x": 0.5,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "1",
+        "E": "3",
+        "S": "half_circle",
+        "index": 2
+      },
+      "3": {
+        "name": "3",
+        "x": 0.70,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "2",
+        "E": "4",
+        "S": "five_pointed_star",
+        "index": 3
+      },
+      "4": {
+        "name": "4",
+        "x": 0.89,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "3",
+        "E": "warn",
+        "S": "9",
+        "index": 4
+      },
+      "5": {
+        "name": "5",
+        "x": 0.1020,
+        "y": 0.3010,
+        "N": "0",
+        "W": "warn",
+        "E": "square",
+        "S": "10",
+        "index": 5
+      },
+      "square": {
+        "name": "6",
+        "x": 0.3010,
+        "y": 0.3010,
+        "N": "1",
+        "W": "5",
+        "E": "half_circle",
+        "S": "trapezoid",
+        "index": 6
+      },
+      "half_circle": {
+        "name": "half_circle",
+        "x": 0.5,
+        "y": 0.3010,
+        "N": "2",
+        "W": "square",
+        "E": "five_pointed_star",
+        "S": "12",
+        "index": 7
+      },
+      "five_pointed_star": {
+        "name": "five_pointed_star",
+        "x": 0.7,
+        "y": 0.3010,
+        "N": "3",
+        "W": "half_circle",
+        "E": "9",
+        "S": "rhomboid",
+        "index": 8
+      },
+      "9": {
+        "name": "9",
+        "x": 0.89,
+        "y": 0.3010,
+        "N": "4",
+        "W": "five_pointed_star",
+        "E": "warn",
+        "S": "circle",
+        "index": 9
+      },
+      "10": {
+        "name": "10",
+        "x": 0.1020,
+        "y": 0.5,
+        "N": "5",
+        "W": "warn",
+        "E": "trapezoid",
+        "S": "15",
+        "index": 10
+      },
+      "trapezoid": {
+        "name": "trapezoid",
+        "x": 0.3010,
+        "y": 0.5,
+        "N": "square",
+        "W": "10",
+        "E": "12",
+        "S": "triangle",
+        "index": 11
+      },
+      "12": {
+        "name": "12",
+        "x": 0.5,
+        "y": 0.5,
+        "N": "half_circle",
+        "W": "trapezoid",
+        "E": "rhomboid",
+        "S": "ellipse",
+        "index": 12
+      },
+      "rhomboid": {
+        "name": "rhomboid",
+        "x": 0.7,
+        "y": 0.5,
+        "N": "five_pointed_star",
+        "W": "12",
+        "E": "circle",
+        "S": "rect",
+        "index": 13
+      },
+      "circle": {
+        "name": "circle",
+        "x": 0.89,
+        "y": 0.5,
+        "N": "9",
+        "W": "rhomboid",
+        "E": "warn",
+        "S": "sector",
+        "index": 14
+      },
+      "15": {
+        "name": "15",
+        "x": 0.1020,
+        "y": 0.7,
+        "N": "10",
+        "W": "warn",
+        "E": "triangle",
+        "S": "20",
+        "index": 15
+      },
+      "triangle": {
+        "name": "triangle",
+        "x": 0.3010,
+        "y": 0.7,
+        "N": "trapezoid",
+        "W": "15",
+        "E": "ellipse",
+        "S": "21",
+        "index": 16
+      },
+      "ellipse": {
+        "name": "ellipse",
+        "x": 0.5,
+        "y": 0.7,
+        "N": "12",
+        "W": "triangle",
+        "E": "rect",
+        "S": "sexangle",
+        "index": 17
+      },
+      "rect": {
+        "name": "rect",
+        "x": 0.7,
+        "y": 0.7,
+        "N": "rhomboid",
+        "W": "ellipse",
+        "E": "sector",
+        "S": "23",
+        "index": 18
+      },
+      "sector": {
+        "name": "sector",
+        "x": 0.89,
+        "y": 0.7,
+        "N": "circle",
+        "W": "rect",
+        "E": "warn",
+        "S": "rhombus",
+        "index": 19
+      },
+      "20": {
+        "name": "20",
+        "x": 0.1020,
+        "y": 0.89,
+        "N": "15",
+        "W": "warn",
+        "E": "21",
+        "S": "warn",
+        "index": 20
+      },
+      "21": {
+        "name": "21",
+        "x": 0.3010,
+        "y": 0.89,
+        "N": "triangle",
+        "W": "20",
+        "E": "sexangle",
+        "S": "warn",
+        "index": 21
+      },
+      "sexangle": {
+        "name": "sexangle",
+        "x": 0.5,
+        "y": 0.89,
+        "N": "ellipse",
+        "W": "21",
+        "E": "23",
+        "S": "warn",
+        "index": 22
+      },
+      "23": {
+        "name": "23",
+        "x": 0.7,
+        "y": 0.89,
+        "N": "rect",
+        "W": "sexangle",
+        "E": "rhombus",
+        "S": "warn",
+        "index": 23
+      },
+      "rhombus": {
+        "name": "rhombus",
+        "x": 0.89,
+        "y": 0.89,
+        "N": "sector",
+        "W": "23",
+        "E": "warn",
+        "S": "warn",
+        "index": 24
+      }
+    }
+  },
+  "map_graphs3": {
+    "src": "./static/img/vm/vm_bg_1.png",
+    "map_id": "map_graphs3",
+    "name": "认识图形3",
+    "info": "我是谁？我在哪？快找到我带我回家吧!",
+    "ratio": 1,
+    "startPoint": "circle",
+    "pointData": {
+      "0": {
+        "name": "0",
+        "x": 0.1020,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "warn",
+        "E": "1",
+        "S": "5",
+        "index": 0
+      },
+      "1": {
+        "name": "1",
+        "x": 0.3010,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "0",
+        "E": "2",
+        "S": "square",
+        "index": 1
+      },
+      "2": {
+        "name": "2",
+        "x": 0.5,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "1",
+        "E": "3",
+        "S": "half_circle",
+        "index": 2
+      },
+      "3": {
+        "name": "3",
+        "x": 0.70,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "2",
+        "E": "4",
+        "S": "five_pointed_star",
+        "index": 3
+      },
+      "4": {
+        "name": "4",
+        "x": 0.89,
+        "y": 0.1020,
+        "N": "warn",
+        "W": "3",
+        "E": "warn",
+        "S": "9",
+        "index": 4
+      },
+      "5": {
+        "name": "5",
+        "x": 0.1020,
+        "y": 0.3010,
+        "N": "0",
+        "W": "warn",
+        "E": "square",
+        "S": "10",
+        "index": 5
+      },
+      "square": {
+        "name": "6",
+        "x": 0.3010,
+        "y": 0.3010,
+        "N": "1",
+        "W": "5",
+        "E": "half_circle",
+        "S": "trapezoid",
+        "index": 6
+      },
+      "half_circle": {
+        "name": "half_circle",
+        "x": 0.5,
+        "y": 0.3010,
+        "N": "2",
+        "W": "square",
+        "E": "five_pointed_star",
+        "S": "12",
+        "index": 7
+      },
+      "five_pointed_star": {
+        "name": "five_pointed_star",
+        "x": 0.7,
+        "y": 0.3010,
+        "N": "3",
+        "W": "half_circle",
+        "E": "9",
+        "S": "rhomboid",
+        "index": 8
+      },
+      "9": {
+        "name": "9",
+        "x": 0.89,
+        "y": 0.3010,
+        "N": "4",
+        "W": "five_pointed_star",
+        "E": "warn",
+        "S": "circle",
+        "index": 9
+      },
+      "10": {
+        "name": "10",
+        "x": 0.1020,
+        "y": 0.5,
+        "N": "5",
+        "W": "warn",
+        "E": "trapezoid",
+        "S": "15",
+        "index": 10
+      },
+      "trapezoid": {
+        "name": "trapezoid",
+        "x": 0.3010,
+        "y": 0.5,
+        "N": "square",
+        "W": "10",
+        "E": "12",
+        "S": "triangle",
+        "index": 11
+      },
+      "12": {
+        "name": "12",
+        "x": 0.5,
+        "y": 0.5,
+        "N": "half_circle",
+        "W": "trapezoid",
+        "E": "rhomboid",
+        "S": "ellipse",
+        "index": 12
+      },
+      "rhomboid": {
+        "name": "rhomboid",
+        "x": 0.7,
+        "y": 0.5,
+        "N": "five_pointed_star",
+        "W": "12",
+        "E": "circle",
+        "S": "rect",
+        "index": 13
+      },
+      "circle": {
+        "name": "circle",
+        "x": 0.89,
+        "y": 0.5,
+        "N": "9",
+        "W": "rhomboid",
+        "E": "warn",
+        "S": "sector",
+        "index": 14
+      },
+      "15": {
+        "name": "15",
+        "x": 0.1020,
+        "y": 0.7,
+        "N": "10",
+        "W": "warn",
+        "E": "triangle",
+        "S": "20",
+        "index": 15
+      },
+      "triangle": {
+        "name": "triangle",
+        "x": 0.3010,
+        "y": 0.7,
+        "N": "trapezoid",
+        "W": "15",
+        "E": "ellipse",
+        "S": "21",
+        "index": 16
+      },
+      "ellipse": {
+        "name": "ellipse",
+        "x": 0.5,
+        "y": 0.7,
+        "N": "12",
+        "W": "triangle",
+        "E": "rect",
+        "S": "sexangle",
+        "index": 17
+      },
+      "rect": {
+        "name": "rect",
+        "x": 0.7,
+        "y": 0.7,
+        "N": "rhomboid",
+        "W": "ellipse",
+        "E": "sector",
+        "S": "23",
+        "index": 18
+      },
+      "sector": {
+        "name": "sector",
+        "x": 0.89,
+        "y": 0.7,
+        "N": "circle",
+        "W": "rect",
+        "E": "warn",
+        "S": "rhombus",
+        "index": 19
+      },
+      "20": {
+        "name": "20",
+        "x": 0.1020,
+        "y": 0.89,
+        "N": "15",
+        "W": "warn",
+        "E": "21",
+        "S": "warn",
+        "index": 20
+      },
+      "21": {
+        "name": "21",
+        "x": 0.3010,
+        "y": 0.89,
+        "N": "triangle",
+        "W": "20",
+        "E": "sexangle",
+        "S": "warn",
+        "index": 21
+      },
+      "sexangle": {
+        "name": "sexangle",
+        "x": 0.5,
+        "y": 0.89,
+        "N": "ellipse",
+        "W": "21",
+        "E": "23",
+        "S": "warn",
+        "index": 22
+      },
+      "23": {
+        "name": "23",
+        "x": 0.7,
+        "y": 0.89,
+        "N": "rect",
+        "W": "sexangle",
+        "E": "rhombus",
+        "S": "warn",
+        "index": 23
+      },
+      "rhombus": {
+        "name": "rhombus",
+        "x": 0.89,
+        "y": 0.89,
+        "N": "sector",
+        "W": "23",
+        "E": "warn",
+        "S": "warn",
+        "index": 24
+      }
+    }
+  }
+}
